@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">PMDM02</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="imagen_usuario">Imagen de cliente1</string>
+    <string name="imagen_admin">Imagen de admin</string>
+    <string name="compras_realizadas">Ver compras realizadas</string>
+    <string name="datos_admin">NomeB Apelido1B Apelido2B</string>
+    <string name="datos_cliente">NomeA Apelido1A Apelido2A</string>
+    <string name="facer_pedido">Facer pedido</string>
+    <string name="pedidos_tramite">Ver pedidos en trámite</string>
+    <string name="logout">Saír</string>
+    <string name="seguinte">Seguinte</string>
+    <string name="Seleccione_categoría">"Seleccione categoría"</string>
+    <string name="Seleccione_producto">"Seleccione producto"</string>
+    <string name="Seleccione_cantidad">"Seleccione cantidad"</string>
+    <string name="finalizar_pedido">"Finalice su pedido"</string>
+    <string name="direccion">Dirección ...:</string>
+    <string name="ciudad">Ciudad ...:</string>
+    <string name="codigo_postal">Código postal ...:</string>
+</resources>
