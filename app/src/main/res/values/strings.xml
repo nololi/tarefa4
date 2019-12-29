@@ -22,7 +22,13 @@
     <string name="Seleccione_producto">"Seleccione producto"</string>
     <string name="Seleccione_cantidad">"Seleccione cantidad"</string>
     <string name="finalizar_pedido">"Finalice su pedido"</string>
-    <string name="direccion">Dirección ...:</string>
-    <string name="ciudad">Ciudad ...:</string>
-    <string name="codigo_postal">Código postal ...:</string>
+    <string name="direccion">Dirección :</string>
+    <string name="ciudad">Ciudad :</string>
+    <string name="codigo_postal">Código postal :</string>
+    <string name="ingrese_contrasinal">Ingrese contrasinal</string>
+    <string name="ingrese_usuario">Ingrese nome do usuario</string>
+    <string name="login_admin">Login como administrador</string>
+    <string name="login">Login</string>
+    <string name="usuario">Usuario:</string>
+    <string name="contrasinal">Contrasinal:</string>
 </resources>
