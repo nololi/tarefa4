@@ -83,16 +83,23 @@
             android:textColor="#FFFFFF"
             android:textSize="12sp" />
 
-        <CheckBox
-            android:id="@+id/esAdmin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_admin"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp" />
-
         <Button
             android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="4sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8sp"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8dp"
+            android:onClick="validarCampos"
+            android:text="@string/login"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/rexistrarse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -102,11 +109,10 @@
             android:layout_marginTop="8sp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:onClick="validarCampos"
-            android:text="@string/login"
+            android:onClick="rexistrar"
+            android:text="@string/rexistrarse"
             android:textSize="12sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

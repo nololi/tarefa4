@@ -25,10 +25,19 @@
     <string name="direccion">Dirección :</string>
     <string name="ciudad">Ciudad :</string>
     <string name="codigo_postal">Código postal :</string>
+
+    <!-- pantalla inicio-->
     <string name="ingrese_contrasinal">Ingrese contrasinal</string>
     <string name="ingrese_usuario">Ingrese nome do usuario</string>
     <string name="login_admin">Login como administrador</string>
     <string name="login">Login</string>
-    <string name="usuario">Usuario:</string>
-    <string name="contrasinal">Contrasinal:</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrasinal">Contrasinal</string>
+    <string name="rexistrarse">Rexistrarse</string>
+    <!-- pantalla rexistro-->
+    <string name="nome">Nome</string>
+    <string name="apelidos">Apelidos</string>
+    <string name="email">Email</string>
+    <string name="administrador">Administrador</string>
+
 </resources>
