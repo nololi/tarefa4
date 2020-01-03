@@ -6,12 +6,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class Rexistro extends AppCompatActivity {
+    private int esAdmin=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +27,6 @@ public class Rexistro extends AppCompatActivity {
     /*Al pulsar botón rexistro*/
     public void rexistrar(View view) {
         //noso nome, apelidos, email, usuario, contrasinal e ter que elixir se o usuario é un cliente ou un administrador.
-       // Context context = getApplicationContext();
         TextView nomeText = findViewById(R.id.nomeText);
         String nome= nomeText.getText().toString();
 
@@ -38,10 +42,7 @@ public class Rexistro extends AppCompatActivity {
         TextView contrasinalText = findViewById(R.id.contrasinalText);
         String contrasinal = contrasinalText.getText().toString(); //no codificado
 
-        //si está seleccionado es admin, sino es usuario
-        boolean isAdmin = (findViewById(R.id.tipo_admin)).isSelected();
 
-        //TODO comprobar si existe
         //realizo una consulta contra la bd con ese usuario si existe
          if(consultarUsuario(usuario)){//si el usuario existe
              Toast.makeText(getApplicationContext(), "El usuario " + usuario+" ya existe", Toast.LENGTH_LONG).show();
@@ -49,28 +50,43 @@ public class Rexistro extends AppCompatActivity {
          }
 
         //Si he llegado aquí no existe -> guardo
-        String insert = "INSERT INTO USUARIOS (nome,apelidos,email, usuario, contrasinal,es_Admin)" +
-                " VALUES ('"+nome+"','"+apelidos+"','"+email+"','"+usuario+"','"+contrasinal+"',"+((isAdmin)? 1 : 0)+") ";
-         BaseDatos.operacionsBD.execSQL(insert);
+        String insert = "INSERT INTO USUARIOS (nome,apelidos,email, usuario, contrasinal,es_admin)" +
+                " VALUES ('"+nome+"','"+apelidos+"','"+email+"','"+usuario+"','"+contrasinal+"',"+esAdmin+") ";
+        BaseDatos.operacionsBD.execSQL(insert);
 
+        //vuelvo a consultar el usuario ¿se ha guardado?
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select * from USUARIOS where usuario='"+usuario+"'", null);
+        if(cursor.getCount()==0){
+            Toast.makeText(getApplicationContext(), "Usuario no guardado", Toast.LENGTH_LONG).show();
+        }
 
          //resetear campos
-        nomeText.setText("");
-        apelidosText.setText("");
-        emailText.setText("");
-        contrasinalText.setText("");
-        usuarioText.setText("");
-        findViewById(R.id.tipo_cliente).setSelected(true);
+       // nomeText.setText("");
+        //apelidosText.setText("");
+        //emailText.setText("");
+        //contrasinalText.setText("");
+        //usuarioText.setText("");
+        //findViewById(R.id.tipo_cliente).setSelected(true);
        //  System.out.println(insert);
     }
 
     public boolean consultarUsuario(String usuario){
-       // Toast.makeText(getApplicationContext(), "select nome from USUARIOS where nome="+usuario+"", Toast.LENGTH_LONG).show();
-       Cursor cursor = BaseDatos.operacionsBD.rawQuery("select nome from USUARIOS where nome='"+usuario+"'", null);
-      // System.out.println(cursor.getCount());
-        //no encontrado
-        return cursor.getCount() != 0;
-//encontrado
+       Cursor cursor = BaseDatos.operacionsBD.rawQuery("select * from USUARIOS where usuario='"+usuario+"'", null);
+        return cursor.getCount() != 0; //devuelve true o false según si se ha encontrado o no
+    }
+
+
+    public void controlSeleccionTipoUsuario(View view) {
+       //realizo la comparación por id y asigno  el valor
+        switch (view.getId()) {
+            case R.id.tipo_admin:
+                esAdmin=1;
+                break;
+            case R.id.tipo_cliente:
+                esAdmin=0;
+                break;
+
+        }
     }
 
 

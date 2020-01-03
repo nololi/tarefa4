@@ -33,14 +33,23 @@ public class MainActivity extends AppCompatActivity {
         String user = userText.getText().toString();
         EditText passText = findViewById(R.id.editContrasinal);
         String pass = passText.getText().toString();
+        int esAdmin=-1;
 
         //comprobar si existe el usuario
         Cursor cursor = consultarUsuario(user,pass);
-        if(cursor.getCount()!=1) {
+        if (cursor.moveToFirst()){
+            do {
+                //almacenar valores
+                esAdmin = cursor.getInt(0);
+            } while(cursor.moveToNext());
+        }
+
+
+        if(esAdmin==-1) { //si no hay valor, la consulta no ha devuelto nada
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, "login incorrecto", duration);
             toast.show();
-        }else if(cursor.getColumnIndex("es_admin") ==1){//admin
+        }else if(esAdmin ==1){//admin
             Intent panelAdmin = new Intent(this, AdminPanel.class);
             startActivity(panelAdmin);
         }else{//user
@@ -66,8 +75,9 @@ public class MainActivity extends AppCompatActivity {
         baseDatos.asigarSQLiteDatabase(operacionsBD);
     }
 
+    //consultar si el usuario y contraseña existe
     public Cursor consultarUsuario(String usuario,String contrasinal){
-        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select es_admin from USUARIOS where nome='"+usuario+"' " +
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select es_admin from USUARIOS where usuario='"+usuario+"' " +
                 "AND contrasinal ='" + contrasinal +"'", null);
         System.out.println("count" + cursor.getCount());
         return cursor;

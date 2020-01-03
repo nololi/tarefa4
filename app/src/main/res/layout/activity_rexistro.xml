@@ -97,14 +97,16 @@
                 android:id="@+id/tipo_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/usuario"
                 android:checked="true"
+                android:onClick="controlSeleccionTipoUsuario"
+                android:text="@string/usuario"
                 android:textSize="12sp" />
 
             <RadioButton
                 android:id="@+id/tipo_admin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="controlSeleccionTipoUsuario"
                 android:text="@string/administrador"
                 android:textSize="12sp" />
 
