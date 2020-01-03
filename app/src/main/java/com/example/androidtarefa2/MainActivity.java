@@ -34,13 +34,18 @@ public class MainActivity extends AppCompatActivity {
         EditText passText = findViewById(R.id.editContrasinal);
         String pass = passText.getText().toString();
         int esAdmin=-1;
+        String nome="";
+        String apelidos="";
 
         //comprobar si existe el usuario
         Cursor cursor = consultarUsuario(user,pass);
         if (cursor.moveToFirst()){
             do {
                 //almacenar valores
-                esAdmin = cursor.getInt(0);
+                nome= cursor.getString(0);
+                apelidos = cursor.getString(1);
+                esAdmin = cursor.getInt(2);
+                System.out.println(nome +  " " + apelidos + " " + esAdmin);
             } while(cursor.moveToNext());
         }
 
@@ -51,9 +56,13 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }else if(esAdmin ==1){//admin
             Intent panelAdmin = new Intent(this, AdminPanel.class);
+            panelAdmin.putExtra("nome",nome); //nome
+            panelAdmin.putExtra("apelidos",apelidos);//apelidos
             startActivity(panelAdmin);
         }else{//user
             Intent hacerPedido = new Intent(this, Cliente1Panel.class);
+            hacerPedido.putExtra("nome",nome);//nome
+            hacerPedido.putExtra("apelidos",apelidos); //apelidos
             startActivity(hacerPedido);
         }
 
@@ -77,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     //consultar si el usuario y contraseña existe
     public Cursor consultarUsuario(String usuario,String contrasinal){
-        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select es_admin from USUARIOS where usuario='"+usuario+"' " +
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select nome,apelidos,es_admin from USUARIOS where usuario='"+usuario+"' " +
                 "AND contrasinal ='" + contrasinal +"'", null);
         System.out.println("count" + cursor.getCount());
         return cursor;
