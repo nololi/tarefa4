@@ -8,12 +8,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import persistencia.BaseDatos;
+
 public class MainActivity extends AppCompatActivity {
-    private BaseDatos baseDatos;
+
 
 
     @Override
@@ -78,10 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearBD(){
-        baseDatos = new BaseDatos(getApplicationContext(),BaseDatos.NOME_BD,null,BaseDatos.VERSION);
-        //guardado referencia a la base de datos
-        SQLiteDatabase operacionsBD = baseDatos.getWritableDatabase();
-        baseDatos.asigarSQLiteDatabase(operacionsBD);
+        new BaseDatos(getApplicationContext(),BaseDatos.NOME_BD,null,BaseDatos.VERSION);
     }
 
     //consultar si el usuario y contraseña existe
@@ -91,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("count" + cursor.getCount());
         return cursor;
     }
+
 
 
 

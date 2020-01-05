@@ -38,6 +38,10 @@ public class DireccionPedido extends AppCompatActivity {
         Toast toast = Toast.makeText(context, textoResumo, duration);
         toast.show();
 
+        //Elimino la toast y guardo en la base de datos
+
+
+
         //borro actividad actual y vuelvo al panel cliente
         Intent intent = new Intent(this, Cliente1Panel.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

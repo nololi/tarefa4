@@ -2,17 +2,13 @@ package com.example.androidtarefa2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import persistencia.BaseDatos;
 
 public class Rexistro extends AppCompatActivity {
     private int esAdmin=0;

@@ -1,4 +1,4 @@
-package com.example.androidtarefa2;
+package persistencia;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,16 +11,17 @@ public class BaseDatos extends SQLiteOpenHelper {
     public static int ACEPTADO=1;
     public static int REXEITADO=2;
 
-
     //modo "sencillo" uso misma referencia bd : crear propiedad
     public static SQLiteDatabase operacionsBD; //para manejar desde otras clases
-
 
     /*
      *Constructor con parámetros
      */
     public BaseDatos(Context context, String nome_BD, SQLiteDatabase.CursorFactory factory , int version_bd) {
         super(context, nome_BD, factory, version_bd);
+        //guardado referencia a la base de datos
+        SQLiteDatabase operacionsBD = this.getWritableDatabase();
+        this.asigarSQLiteDatabase(operacionsBD);
     }
 
     /*
@@ -58,9 +59,10 @@ public class BaseDatos extends SQLiteOpenHelper {
     }
     //TODO destroy
 
-    public void asigarSQLiteDatabase(SQLiteDatabase operacionsBD){
-        BaseDatos.operacionsBD = operacionsBD;
+    private void asigarSQLiteDatabase(SQLiteDatabase operacionsBD){
+        this.operacionsBD = operacionsBD;
     }
+
 
 
 }
