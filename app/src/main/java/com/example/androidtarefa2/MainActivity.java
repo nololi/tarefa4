@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearBD(){
-        baseDatos = new BaseDatos(getApplicationContext(),"USUARIOS",null,1);
+        baseDatos = new BaseDatos(getApplicationContext(),BaseDatos.NOME_BD,null,BaseDatos.VERSION);
         //guardado referencia a la base de datos
         SQLiteDatabase operacionsBD = baseDatos.getWritableDatabase();
         baseDatos.asigarSQLiteDatabase(operacionsBD);

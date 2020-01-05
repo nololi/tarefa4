@@ -5,6 +5,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BaseDatos extends SQLiteOpenHelper {
+    public static String NOME_BD ="TENDAPMDM03";
+    public static int VERSION =1;
+    public static int EN_TRAMITE=0;
+    public static int ACEPTADO=1;
+    public static int REXEITADO=2;
+
 
     //modo "sencillo" uso misma referencia bd : crear propiedad
     public static SQLiteDatabase operacionsBD; //para manejar desde otras clases
@@ -32,6 +38,18 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "contrasinal VARCHAR(50) NOT NULL,"+
                 "es_admin BOOLEAN NOT NULL)"; // 0= falso se almacenan como enteros
         db.execSQL(crear_taboa_usuarios);
+
+
+        //categoría, producto, cantidade, dirección, cidade e código postal
+        String crear_taboa_compras ="CREATE TABLE COMPRAS (" +
+                "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                "categoria VARCHAR(50) NOT NULL,"+
+                "producto VARCHAR(50) NOT NULL,"+
+                "cantidade VARCHAR(50) NOT NULL,"+
+                "cidade VARCHAR(50) NOT NULL,"+
+                "codigo_postal VARCHAR(50) NOT NULL,"+
+                "estado_pedido INTEGER(1) NOT NULL)"; // 0 = trámite, 1 = aceptado, 2 = rexeitado
+        db.execSQL(crear_taboa_compras);
     }
 
     @Override
