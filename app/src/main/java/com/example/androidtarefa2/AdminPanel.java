@@ -15,7 +15,7 @@ public class AdminPanel extends AppCompatActivity {
         //recojo los valores enviados desde la página anterior y los añado
         String nome = getIntent().getExtras().getString("nome");
         String apelidos = getIntent().getExtras().getString("apelidos");
-        TextView datosCliente = (TextView)findViewById(R.id.datosCliente);
+        TextView datosCliente = findViewById(R.id.datosCliente);
         datosCliente.setText(nome + " " + apelidos);
     }
 }

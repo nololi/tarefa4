@@ -27,6 +27,7 @@ public class HacerPedido extends AppCompatActivity {
     private Spinner cantidadeSeleccion;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class HacerPedido extends AppCompatActivity {
         cargarProductos(); //cargo los productos según categoría
 
 
+
     }
 
     //Método para pasar los valores de los campos seleccionados a la siguiente pantalla
@@ -49,6 +51,10 @@ public class HacerPedido extends AppCompatActivity {
         direccionPedido.putExtra("categoria", categoriaSeleccion.getSelectedItem().toString());
         direccionPedido.putExtra("producto", productosSeleccion.getSelectedItem().toString());
         direccionPedido.putExtra("cantidade", cantidadeSeleccion.getSelectedItem().toString());
+        //TODO revisar esta parte : paso los datos a la siguiente pantalla
+        direccionPedido.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+        direccionPedido.putExtra("nome", getIntent().getExtras().getString("nome"));
+        direccionPedido.putExtra("apelidos", getIntent().getExtras().getString("apelidos"));
 
         startActivity(direccionPedido);
     }

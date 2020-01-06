@@ -8,21 +8,30 @@ import android.view.View;
 import android.widget.TextView;
 
 public class Cliente1Panel extends AppCompatActivity {
+    private String nome;
+    private String apelidos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cliente1_panel);
 
-        //recojo los valores enviados desde la página anterior y los añado
-        String nome = getIntent().getExtras().getString("nome");
-        String apelidos = getIntent().getExtras().getString("apelidos");
-        TextView datosCliente = (TextView)findViewById(R.id.datosCliente);
-        datosCliente.setText(nome + " " + apelidos);
+            //recojo los valores enviados desde la página anterior y los añado
+            nome = getIntent().getExtras().getString("nome");
+            apelidos = getIntent().getExtras().getString("apelidos");
+            TextView datosCliente = findViewById(R.id.datosCliente);
+            datosCliente.setText(nome + " " + apelidos);
+
+
     }
+
     //Hacer nuevos pedidos
     public void hacerPedidos(View view){
         Intent nuevoPedido = new Intent(this, HacerPedido.class);
+        nuevoPedido.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        nuevoPedido.putExtra("nome",nome);
+        nuevoPedido.putExtra("apelidos",apelidos);
         startActivity(nuevoPedido);
     }
 

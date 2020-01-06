@@ -22,6 +22,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         //guardado referencia a la base de datos
         SQLiteDatabase operacionsBD = this.getWritableDatabase();
         this.asigarSQLiteDatabase(operacionsBD);
+        //operacionsBD.execSQL("DROP TABLE IF EXISTS COMPRAS");
     }
 
     /*
@@ -41,14 +42,16 @@ public class BaseDatos extends SQLiteOpenHelper {
         db.execSQL(crear_taboa_usuarios);
 
 
-        //categoría, producto, cantidade, dirección, cidade e código postal
+        //categoría, producto, cantidade, dirección, cidade e código postal, estado pedido
         String crear_taboa_compras ="CREATE TABLE COMPRAS (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 "categoria VARCHAR(50) NOT NULL,"+
                 "producto VARCHAR(50) NOT NULL,"+
                 "cantidade VARCHAR(50) NOT NULL,"+
+                "usuario VARCHAR(50) NOT NULL,"+ //TODO FK
+                "direccion VARCHAR(50) NOT NULL,"+
                 "cidade VARCHAR(50) NOT NULL,"+
-                "codigo_postal VARCHAR(50) NOT NULL,"+
+                "codigo_postal INTEGER(5) NOT NULL,"+
                 "estado_pedido INTEGER(1) NOT NULL)"; // 0 = trámite, 1 = aceptado, 2 = rexeitado
         db.execSQL(crear_taboa_compras);
     }
@@ -60,7 +63,7 @@ public class BaseDatos extends SQLiteOpenHelper {
     //TODO destroy
 
     private void asigarSQLiteDatabase(SQLiteDatabase operacionsBD){
-        this.operacionsBD = operacionsBD;
+        BaseDatos.operacionsBD = operacionsBD;
     }
 
 
