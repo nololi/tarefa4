@@ -38,6 +38,7 @@ public class Cliente1Panel extends AppCompatActivity {
     //Ver pedidos
     public void verPedidos(View view){
         Intent pedidos = new Intent(this, PedidosTramite.class);
+        pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         startActivity(pedidos);
     }
 

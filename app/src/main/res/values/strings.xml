@@ -39,5 +39,7 @@
     <string name="apelidos">Apelidos</string>
     <string name="email">Email</string>
     <string name="administrador">Administrador</string>
+    <!-- pantalla pedidos en trámite-->
+    <string name="listado_tramite">Listado pedidos en trámite</string>
 
 </resources>
