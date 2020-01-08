@@ -2,8 +2,14 @@ package com.example.androidtarefa2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import com.example.androidtarefa2.R;
+
+
 
 public class AdminPanel extends AppCompatActivity {
 
@@ -17,5 +23,12 @@ public class AdminPanel extends AppCompatActivity {
         String apelidos = getIntent().getExtras().getString("apelidos");
         TextView datosCliente = findViewById(R.id.datosCliente);
         datosCliente.setText(nome + " " + apelidos);
+    }
+
+    //Ver pedidos
+    public void verPedidosTramite(View view){
+        Intent pedidos = new Intent(this, AdminPedidosTramite.class);
+        pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        startActivity(pedidos);
     }
 }
