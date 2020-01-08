@@ -41,5 +41,8 @@
     <string name="administrador">Administrador</string>
     <!-- pantalla pedidos en trámite-->
     <string name="listado_tramite">Listado pedidos en trámite</string>
+    <!-- pantalla administrador-->
+    <string name="pedidos_aceptados">Ver pedidos aceptados</string>
+    <string name="pedidos_rexeitados">Ver pedidos rexeitados</string>
 
 </resources>

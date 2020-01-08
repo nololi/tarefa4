@@ -1,7 +1,6 @@
 package adaptadores_recycler_view_ver_pedidos_en_curso;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
