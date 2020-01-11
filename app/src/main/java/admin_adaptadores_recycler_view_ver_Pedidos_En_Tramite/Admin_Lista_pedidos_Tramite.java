@@ -91,7 +91,10 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
        values.add(value);
     }
 
-
+    public void resetearLista(){
+        //reseteo
+        values = new ArrayList<>();
+    }
 
 
 }

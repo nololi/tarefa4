@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.database.Cursor;
 import android.os.Bundle;
 
-import admin_adaptadores_recycler_view_ver_Pedidos_En_Tramite.Admin_Lista_pedidos_Tramite;
 import admin_adaptadores_recycler_view_ver_pedidos_aceptados.Admin_Lista_Pedidos_Aceptados;
 import persistencia.BaseDatos;
 
@@ -21,7 +20,7 @@ public class AdminPedidosAceptados extends AppCompatActivity {
 
         Admin_Lista_Pedidos_Aceptados recycleAdapter = new Admin_Lista_Pedidos_Aceptados();
         //iniciar lista a mostrar
-        consultaPedidosTramite(recycleAdapter);
+        consultaPedidosAceptados(recycleAdapter);
 
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -33,7 +32,7 @@ public class AdminPedidosAceptados extends AppCompatActivity {
     }
 
 
-    private void consultaPedidosTramite(Admin_Lista_Pedidos_Aceptados recycleAdapter) {//EN_TRAMITE
+    private void consultaPedidosAceptados(Admin_Lista_Pedidos_Aceptados recycleAdapter) {//EN_TRAMITE
         String producto;
         String cantidade;
         String direccion;
@@ -41,6 +40,7 @@ public class AdminPedidosAceptados extends AppCompatActivity {
         String codigo_postal;
         int id;
 
+        recycleAdapter.resetearLista();//resetear valores
 
         Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal,_id from COMPRAS WHERE " +
                 " estado_pedido =" + BaseDatos.ACEPTADO + "", null);

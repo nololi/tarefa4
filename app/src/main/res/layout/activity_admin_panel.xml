@@ -70,10 +70,12 @@
             android:layout_height="wrap_content"
             android:onClick="verPedidosAceptados"
             android:text="@string/pedidos_aceptados" />
+
         <Button
             android:id="@+id/pedidos_rexeitados"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="verPedidosRexeitados"
             android:text="@string/pedidos_rexeitados" />
 
         <Button

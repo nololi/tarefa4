@@ -38,4 +38,11 @@ public class AdminPanel extends AppCompatActivity {
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         startActivity(pedidos);
     }
+
+    //Ver pedidos rexeitados
+    public void verPedidosRexeitados(View view){
+        Intent pedidos = new Intent(this, AdminPedidosRexeitados.class);
+        pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        startActivity(pedidos);
+    }
 }
