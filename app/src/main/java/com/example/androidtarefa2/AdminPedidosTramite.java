@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 
 import admin_adaptadores_recycler_view_ver_Pedidos_En_Tramite.Admin_Lista_pedidos_Tramite;
 import persistencia.BaseDatos;
@@ -35,8 +36,10 @@ public class AdminPedidosTramite extends AppCompatActivity {
         String direccion;
         String cidade;
         String codigo_postal;
+        int id;
 
-        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal from COMPRAS WHERE " +
+
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal,_id from COMPRAS WHERE " +
                 " estado_pedido =" + BaseDatos.EN_TRAMITE + "", null);
 
         if (cursor.moveToFirst()) {
@@ -47,11 +50,24 @@ public class AdminPedidosTramite extends AppCompatActivity {
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
-                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal);
-                recycleAdapter.añadirvalores(producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
+                 id = cursor.getInt(5);
+                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal + "  " + cursor.getInt(5));
+                recycleAdapter.añadirvalores("_id" + id +" \nPedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
             } while (cursor.moveToNext());
         }
 
+
+    }
+
+
+    public void guardar(View view){
+        view.getId();
+        System.out.println("guardar" + view.getId());
+
+    }
+
+    public void rexeitar(View view){
+        System.out.println("rexeitar" + view.getId());
 
     }
 }

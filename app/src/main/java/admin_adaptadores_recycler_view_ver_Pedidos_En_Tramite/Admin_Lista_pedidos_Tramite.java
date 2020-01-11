@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,13 +15,13 @@ import com.example.androidtarefa2.R;
 
 import java.util.ArrayList;
 
-//import adaptadores_recycler_view_ver_pedidos_en_curso.Carga_lista_pedidos_tramite;
-
+import persistencia.BaseDatos;
 
 
 public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
     private static ArrayList<String> values = new ArrayList<>();
+
 
     @NonNull
     @Override
@@ -38,8 +41,45 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         Admin_Carga_Pedidos_Tramite viewHolderMeu = (Admin_Carga_Pedidos_Tramite) viewHolder;
-        viewHolderMeu.itemTexto.setText(values.get(position));
-       //botons
+        String id = values.get(position).split("Pedido")[0];
+        final String id2 = id.split("_id")[1];
+
+
+        //TODO ¿recarga página??
+
+       Context context = viewHolderMeu.table.getContext();
+
+        TableRow tableRow = new TableRow(context);
+
+//TODO dar formato
+
+        TextView texto = new TextView(context);
+        texto.setText(values.get(position));
+
+        final Button btn_aceptar = new Button(context);
+        btn_aceptar.setText(R.string.aceptar_pedido);
+        btn_aceptar.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+              BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO +"' where _id='"+ id2 +"'");
+            }
+        });
+
+
+        Button btn_rexeitar = new Button(context);
+        btn_rexeitar.setText(R.string.rexeitar_pedido);
+        btn_rexeitar.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.REXEITADO +"' where _id='"+ id2 +"'");
+            }
+        });
+
+        tableRow.addView(texto);
+        tableRow.addView(btn_aceptar);
+        tableRow.addView(btn_rexeitar);
+
+        viewHolderMeu.table.addView(tableRow);
+
+
     }
 
     @Override
@@ -50,4 +90,8 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
     public void añadirvalores(String value){
        values.add(value);
     }
+
+
+
+
 }

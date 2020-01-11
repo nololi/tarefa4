@@ -46,5 +46,6 @@
     <string name="pedidos_rexeitados">Ver pedidos rexeitados</string>
     <!-- pantalla aceptar pedidos administrador-->
     <string name="aceptar_pedido">Aceptar</string>
+    <string name="rexeitar_pedido">Rexeitar</string>
 
 </resources>
