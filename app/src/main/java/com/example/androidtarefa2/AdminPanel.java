@@ -25,9 +25,16 @@ public class AdminPanel extends AppCompatActivity {
         datosCliente.setText(nome + " " + apelidos);
     }
 
-    //Ver pedidos
+    //Ver pedidos en trámite
     public void verPedidosTramite(View view){
         Intent pedidos = new Intent(this, AdminPedidosTramite.class);
+        pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        startActivity(pedidos);
+    }
+
+    //Ver pedido aceptados
+    public void verPedidosAceptados(View view){
+        Intent pedidos = new Intent(this, AdminPedidosAceptados.class);
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         startActivity(pedidos);
     }
