@@ -1,14 +1,18 @@
 package admin_adaptadores_recycler_view_ver_Pedidos_En_Tramite;
 
 import android.content.Context;
+import android.os.Build;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidtarefa2.R;
@@ -38,10 +42,11 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         return viewHolder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         Admin_Carga_Pedidos_Tramite viewHolderMeu = (Admin_Carga_Pedidos_Tramite) viewHolder;
-        String id = values.get(position).split("Pedido")[0];
+        String id = values.get(position).split("Usuario")[0];
         final String id2 = id.split("_id")[1];
 
 
@@ -49,14 +54,22 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
        Context context = viewHolderMeu.table.getContext();
 
-        TableRow tableRow = new TableRow(context);
+       TableRow tableRow = new TableRow(context);
 
-//TODO dar formato
+        //FOPMATO
+        LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        parametros.setMargins(8,8,8,8);
 
+        //TEXTO A MOSTRAR
         TextView texto = new TextView(context);
-        texto.setText(values.get(position));
+        texto.setText(values.get(position).split(id2)[1]);//no quiero mostrar el id del pedido
+        //ajusto el tamaño  al contenido del texto
+        texto.setLayoutParams(parametros);
 
+        //BOTON ACEPTAR
         final Button btn_aceptar = new Button(context);
+        //ajusto el tamaño  al contenido del botón
+        btn_aceptar.setLayoutParams (parametros);
         btn_aceptar.setText(R.string.aceptar_pedido);
         btn_aceptar.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -65,7 +78,10 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         });
 
 
+        //BOTON REXEITAR
         Button btn_rexeitar = new Button(context);
+        //ajusto el tamaño  al contenido del botón
+        btn_rexeitar.setLayoutParams (parametros);
         btn_rexeitar.setText(R.string.rexeitar_pedido);
         btn_rexeitar.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -73,9 +89,21 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
             }
         });
 
-        tableRow.addView(texto);
-        tableRow.addView(btn_aceptar);
-        tableRow.addView(btn_rexeitar);
+
+        LinearLayout layout = new LinearLayout(context);
+        //layout interno tamaño padre
+        //layout.setLayoutParams(parametros);
+        layout.setOrientation(LinearLayout.VERTICAL);//1
+        layout.addView(texto);
+        layout.addView(btn_aceptar);
+        layout.addView(btn_rexeitar);
+
+
+       // tableRow.addView(texto);
+        //tableRow.addView(btn_aceptar);
+        //tableRow.addView(btn_rexeitar);
+
+        tableRow.addView(layout);
 
         viewHolderMeu.table.addView(tableRow);
 

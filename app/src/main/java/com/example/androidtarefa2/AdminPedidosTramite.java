@@ -36,11 +36,12 @@ public class AdminPedidosTramite extends AppCompatActivity {
         String direccion;
         String cidade;
         String codigo_postal;
+        String usuario;
         int id;
 
         recycleAdapter.resetearLista();//resetear valores
 
-        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal,_id from COMPRAS WHERE " +
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal,_id,usuario from COMPRAS WHERE " +
                 " estado_pedido =" + BaseDatos.EN_TRAMITE + "", null);
 
         if (cursor.moveToFirst()) {
@@ -51,9 +52,10 @@ public class AdminPedidosTramite extends AppCompatActivity {
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
-                 id = cursor.getInt(5);
+                id = cursor.getInt(5);
+                usuario = cursor.getString(6);
                 System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal + "  " + cursor.getInt(5));
-                recycleAdapter.añadirvalores("_id" + id +" \nPedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
+                recycleAdapter.añadirvalores("_id" + id +"Usuario:  " + usuario +"\nPedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
             } while (cursor.moveToNext());
         }
 

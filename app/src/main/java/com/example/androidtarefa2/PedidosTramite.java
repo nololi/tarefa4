@@ -54,8 +54,8 @@ public class PedidosTramite extends AppCompatActivity {
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
-                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal);
-                recycleAdapter.añadirvalores(producto + " " + cantidade + direccion + cidade + codigo_postal);//añadir valores a la lista
+                //añadir valores a la lista
+                recycleAdapter.añadirvalores(producto + " " + cantidade + " " + direccion + " " +cidade + " " +codigo_postal);
             } while (cursor.moveToNext());
         }
 
