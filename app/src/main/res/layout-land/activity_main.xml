@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -32,7 +32,7 @@
                 android:id="@+id/Usuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_margin="4sp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -52,7 +52,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8sp"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="Ingrese nome do usuario"
+                android:contentDescription="@string/ingrese_usuario"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:textColor="#FFFFFF"
@@ -62,7 +62,7 @@
                 android:id="@+id/contrasinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_margin="4sp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -82,9 +82,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8sp"
                 android:layout_marginEnd="8dp"
-                android:contentDescription="Ingrese contrasinal"
+                android:contentDescription="@string/ingrese_contrasinal"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp" />
 
@@ -98,9 +98,8 @@
                 android:layout_marginLeft="8sp"
                 android:layout_marginTop="8sp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
                 android:onClick="validarCampos"
-                android:text="Login"
+                android:text="@string/login"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 

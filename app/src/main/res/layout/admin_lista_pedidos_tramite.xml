@@ -8,43 +8,6 @@
         android:id="@+id/tabla_pedidos_tramite"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--
-        <TableRow
-            android:id="@+id/tabla_pedidos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/admin_pedido_listado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/boton_aceptar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="guardar"
-                android:text="@string/aceptar_pedido" />
-
-            <Button
-                android:id="@+id/boton_cancelar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="rexeitar"
-                android:text="@string/rexeitar_pedido" />
-        </TableRow>
--->
-
-        <!--
-        <TableRow
-            android:id="@+id/tabla_pedidos2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-        </TableRow>
-        -->
-
     </TableLayout>
 
 </androidx.cardview.widget.CardView>
