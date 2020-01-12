@@ -45,6 +45,7 @@ public class Cliente1Panel extends AppCompatActivity {
     //Ver compras realizadas
     public void mostrarHistóricoCompras(View view){
         Intent historicoCompras = new Intent(this,HistoricoCompras.class);
+        historicoCompras.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         startActivity(historicoCompras);
     }
 
