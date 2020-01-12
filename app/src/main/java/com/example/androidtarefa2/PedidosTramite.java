@@ -23,6 +23,7 @@ public class PedidosTramite extends AppCompatActivity {
         usuario = getIntent().getExtras().getString("usuario");
 
         Lista_pedidos_tramite recycleAdapter = new Lista_pedidos_tramite();
+        recycleAdapter.resetearLista();//resetear valores
         consultaPedidosTramite(recycleAdapter); //inicio la lista a mostrar
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);

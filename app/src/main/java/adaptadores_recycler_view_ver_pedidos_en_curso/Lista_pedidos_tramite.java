@@ -55,7 +55,9 @@ public class Lista_pedidos_tramite extends RecyclerView.Adapter {
         values.add(value);
     }
 
-
-    //TODO resetear array list
+    public void resetearLista(){
+        //reseteo
+        values = new ArrayList<>();
+    }
 
 }
