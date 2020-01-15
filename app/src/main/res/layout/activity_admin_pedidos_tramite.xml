@@ -7,8 +7,14 @@
     android:background="#D7648DAF"
     tools:context=".AdminPedidosTramite">
 
+    <include
+        android:id="@+id/admin_layout_toolbar_back"
+        layout="@layout/toolbar_atras"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvwRecycleView_Pedidos_Cliente_En_Tramite"/>
+        android:id="@+id/rvwRecycleView_Pedidos_Cliente_En_Tramite"
+        android:layout_marginTop="58dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

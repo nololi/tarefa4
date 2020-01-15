@@ -48,4 +48,7 @@
     <string name="aceptar_pedido">Aceptar</string>
     <string name="rexeitar_pedido">Rexeitar</string>
 
+    <!--botón atrás-->
+    <string name="atras">Atrás</string>
+
 </resources>

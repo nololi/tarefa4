@@ -18,6 +18,8 @@ import com.example.androidtarefa2.R;
 
 
 public class AdminPanel extends AppCompatActivity {
+    private String nome;
+    private String apelidos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +30,8 @@ public class AdminPanel extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //recojo los valores enviados desde la página anterior y los añado
-        String nome = getIntent().getExtras().getString("nome");
-        String apelidos = getIntent().getExtras().getString("apelidos");
+         nome = getIntent().getExtras().getString("nome");
+         apelidos = getIntent().getExtras().getString("apelidos");
         TextView datosCliente = findViewById(R.id.datosCliente);
         datosCliente.setText(nome + " " + apelidos);
     }
@@ -50,16 +52,22 @@ public class AdminPanel extends AppCompatActivity {
             case R.id.item_pedidos_aceptados:
                 Intent pedidosAceptados = new Intent(this, AdminPedidosAceptados.class);
                 pedidosAceptados.putExtra("usuario",usuario);
+                pedidosAceptados.putExtra("nome",nome);
+                pedidosAceptados.putExtra("apelidos",apelidos);
                 startActivity(pedidosAceptados);
                 return true;
             case R.id.item_pedidos_rexeitados:
                 Intent pedidosRexeitados = new Intent(this, AdminPedidosRexeitados.class);
                 pedidosRexeitados.putExtra("usuario",usuario);
+                pedidosRexeitados.putExtra("nome",nome);
+                pedidosRexeitados.putExtra("apelidos",apelidos);
                 startActivity(pedidosRexeitados);
                 return true;
             case R.id.item_pedidos_tramite:
                 Intent pedidos = new Intent(this, AdminPedidosTramite.class);
                 pedidos.putExtra("usuario",usuario);
+                pedidos.putExtra("nome",nome);
+                pedidos.putExtra("apelidos",apelidos);
                 startActivity(pedidos);
                 return true;
         }
@@ -70,6 +78,8 @@ public class AdminPanel extends AppCompatActivity {
     public void verPedidosTramite(View view){
         Intent pedidos = new Intent(this, AdminPedidosTramite.class);
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        pedidos.putExtra("nome",nome);
+        pedidos.putExtra("apelidos",apelidos);
         startActivity(pedidos);
     }
 
@@ -77,6 +87,8 @@ public class AdminPanel extends AppCompatActivity {
     public void verPedidosAceptados(View view){
         Intent pedidos = new Intent(this, AdminPedidosAceptados.class);
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        pedidos.putExtra("nome",nome);
+        pedidos.putExtra("apelidos",apelidos);
         startActivity(pedidos);
     }
 
@@ -84,6 +96,8 @@ public class AdminPanel extends AppCompatActivity {
     public void verPedidosRexeitados(View view){
         Intent pedidos = new Intent(this, AdminPedidosRexeitados.class);
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        pedidos.putExtra("nome",nome);
+        pedidos.putExtra("apelidos",apelidos);
         startActivity(pedidos);
     }
 

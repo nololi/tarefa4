@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminPedidosRexeitados"></activity>
-        <activity android:name=".AdminPedidosAceptados" />
-        <activity android:name=".AdminPedidosTramite" />
+        <activity android:name=".AdminPedidosRexeitados"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".AdminPedidosAceptados"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".AdminPedidosTramite"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".Rexistro" />
         <activity android:name=".HistoricoCompras" />
         <activity android:name=".DireccionPedido" />
