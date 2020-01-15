@@ -24,7 +24,7 @@ public class HistoricoCompras extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico_compras);
 
-        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);
         setSupportActionBar(toolbar);
 
 

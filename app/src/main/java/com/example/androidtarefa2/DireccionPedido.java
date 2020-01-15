@@ -38,7 +38,7 @@ public class DireccionPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direccion_pedido);
 
-        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);
         setSupportActionBar(toolbar);
 
         inicializarValores();

@@ -25,7 +25,7 @@ public class PedidosTramite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos_tramite);
 
-        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);
         setSupportActionBar(toolbar);
 
         usuario = getIntent().getExtras().getString("usuario");
