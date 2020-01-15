@@ -1,10 +1,16 @@
 package com.example.androidtarefa2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.example.androidtarefa2.R;
@@ -18,11 +24,46 @@ public class AdminPanel extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_panel);
 
+        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar);
+        setSupportActionBar(toolbar);
+
         //recojo los valores enviados desde la página anterior y los añado
         String nome = getIntent().getExtras().getString("nome");
         String apelidos = getIntent().getExtras().getString("apelidos");
         TextView datosCliente = findViewById(R.id.datosCliente);
         datosCliente.setText(nome + " " + apelidos);
+    }
+
+    //sobreescribo método onCreateOptionsMenu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_admin_items,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //sobrescribo método onOptionsItemSelected, y redirijo a cada opción
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        String usuario = getIntent().getExtras().getString("usuario");
+        switch(item.getItemId()){
+            case R.id.item_pedidos_aceptados:
+                Intent pedidosAceptados = new Intent(this, AdminPedidosAceptados.class);
+                pedidosAceptados.putExtra("usuario",usuario);
+                startActivity(pedidosAceptados);
+                return true;
+            case R.id.item_pedidos_rexeitados:
+                Intent pedidosRexeitados = new Intent(this, AdminPedidosRexeitados.class);
+                pedidosRexeitados.putExtra("usuario",usuario);
+                startActivity(pedidosRexeitados);
+                return true;
+            case R.id.item_pedidos_tramite:
+                Intent pedidos = new Intent(this, AdminPedidosTramite.class);
+                pedidos.putExtra("usuario",usuario);
+                startActivity(pedidos);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Ver pedidos en trámite

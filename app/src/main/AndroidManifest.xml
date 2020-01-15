@@ -18,8 +18,8 @@
         <activity android:name=".PedidosTramite" />
         <activity android:name=".HacerPedido" />
         <activity android:name=".Cliente1Panel" />
-        <activity android:name=".ClientePanel" />
-        <activity android:name=".AdminPanel" />
+        <activity android:name=".AdminPanel"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
