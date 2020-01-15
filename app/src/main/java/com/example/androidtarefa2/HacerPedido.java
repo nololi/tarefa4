@@ -1,9 +1,14 @@
 package com.example.androidtarefa2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +38,9 @@ public class HacerPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_pedido);
 
+        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        setSupportActionBar(toolbar);
+
         //asigno los elementos gráficos
         categoriaSeleccion = findViewById(R.id.Categoria_seleccion);
         productosSeleccion = findViewById(R.id.Producto_seleccion);
@@ -43,6 +51,29 @@ public class HacerPedido extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_back,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.atras){
+            System.out.println("atrás");
+            Intent intent = new Intent(getApplicationContext(), Cliente1Panel.class);
+            intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+            intent.putExtra("nome",getIntent().getExtras().getString("nome"));
+            intent.putExtra("apelidos",getIntent().getExtras().getString("apelidos"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     //Método para pasar los valores de los campos seleccionados a la siguiente pantalla
     public void pulsarSeguinte(View view) {

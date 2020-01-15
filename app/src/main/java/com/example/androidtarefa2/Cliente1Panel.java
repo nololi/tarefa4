@@ -39,6 +39,8 @@ public class Cliente1Panel extends AppCompatActivity {
     public void verPedidos(View view){
         Intent pedidos = new Intent(this, PedidosTramite.class);
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        pedidos.putExtra("nome",nome);
+        pedidos.putExtra("apelidos",apelidos);
         startActivity(pedidos);
     }
 
@@ -46,6 +48,8 @@ public class Cliente1Panel extends AppCompatActivity {
     public void mostrarHistóricoCompras(View view){
         Intent historicoCompras = new Intent(this,HistoricoCompras.class);
         historicoCompras.putExtra("usuario",getIntent().getExtras().getString("usuario"));
+        historicoCompras.putExtra("nome",nome);
+        historicoCompras.putExtra("apelidos",apelidos);
         startActivity(historicoCompras);
     }
 

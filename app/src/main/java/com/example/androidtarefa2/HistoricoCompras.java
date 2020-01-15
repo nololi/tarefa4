@@ -1,11 +1,17 @@
 package com.example.androidtarefa2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import adaptadores_recycler_view_pedidos_admitidos.Lista_pedidos_admitidos;
 import admin_adaptadores_recycler_view_ver_pedidos_aceptados.Admin_Lista_Pedidos_Aceptados;
@@ -18,6 +24,10 @@ public class HistoricoCompras extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico_compras);
 
+        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        setSupportActionBar(toolbar);
+
+
         Lista_pedidos_admitidos recycleAdapter = new Lista_pedidos_admitidos();
         //iniciar lista a mostrar
         consultaPedidosAceptados(recycleAdapter,getIntent().getExtras().get("usuario").toString());
@@ -28,6 +38,28 @@ public class HistoricoCompras extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(recycleAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_back,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.atras){
+            System.out.println("atrás");
+            Intent intent = new Intent(getApplicationContext(), Cliente1Panel.class);
+            intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+            intent.putExtra("nome",getIntent().getExtras().getString("nome"));
+            intent.putExtra("apelidos",getIntent().getExtras().getString("apelidos"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //Consulta pedidos del usuario

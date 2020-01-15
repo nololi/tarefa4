@@ -1,6 +1,8 @@
 package com.example.androidtarefa2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -8,6 +10,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,7 +37,33 @@ public class DireccionPedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direccion_pedido);
+
+        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        setSupportActionBar(toolbar);
+
         inicializarValores();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_back,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.atras){
+            System.out.println("atrás");
+            Intent intent = new Intent(getApplicationContext(), HacerPedido.class);
+            intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+            intent.putExtra("nome",getIntent().getExtras().getString("nome"));
+            intent.putExtra("apelidos",getIntent().getExtras().getString("apelidos"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //método para inicializar valores enviados desde la pantalla anterior
