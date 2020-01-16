@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidtarefa2.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import persistencia.BaseDatos;
@@ -24,7 +27,7 @@ import persistencia.BaseDatos;
 
 public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
-    private static ArrayList<String> values = new ArrayList<>();
+    private static ArrayList<JSONObject> values = new ArrayList<>();
 
 
     @NonNull
@@ -45,24 +48,37 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        Admin_Carga_Pedidos_Tramite viewHolderMeu = (Admin_Carga_Pedidos_Tramite) viewHolder;
-        String id = values.get(position).split("Usuario")[0];
-        final String id2 = id.split("_id")[1];
+        final JSONObject object;
+        String valores;
+        try {
+            //utilizo todos los vlores menos el Id que lo usaré para la consulta
+            object = values.get(position);
+            valores  = "Usuario:  " + object.getString("usuario");
+            valores +="\nProducto:  "  + object.getString("producto");
+            valores+="\nCantidade:  " + object.getString("cantidade");
+            valores+="\nDirección:  " + object.getString("direccion");
+            valores+="\nCidade:  " + object.getString("cidade");
+            valores+="\nCódigo Postal:   " + object.getString("codigo_postal");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
 
 
         //TODO ¿recarga página tras click??
-
+        Admin_Carga_Pedidos_Tramite viewHolderMeu = (Admin_Carga_Pedidos_Tramite) viewHolder;
        Context context = viewHolderMeu.table.getContext();
 
        TableRow tableRow = new TableRow(context);
 
         //FORMATO
-        LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         parametros.setMargins(8,8,8,8);
 
         //TEXTO A MOSTRAR
         TextView texto = new TextView(context);
-        texto.setText(values.get(position).split(id2)[1]);//no quiero mostrar el id del pedido
+        texto.setText(valores);
         //ajusto el tamaño  al contenido del texto
         texto.setLayoutParams(parametros);
 
@@ -73,7 +89,12 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         btn_aceptar.setText(R.string.aceptar_pedido);
         btn_aceptar.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-              BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO +"' where _id='"+ id2 +"'");
+                try {
+                    BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO
+                            +"' where _id='"+ object.getString("id") +"'");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -85,7 +106,12 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         btn_rexeitar.setText(R.string.rexeitar_pedido);
         btn_rexeitar.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.REXEITADO +"' where _id='"+ id2 +"'");
+                try {
+                    BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.REXEITADO
+                            +"' where _id='"+ object.getString("id") +"'");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -108,7 +134,7 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         return values.size();
     }
 
-    public void añadirvalores(String value){
+    public void añadirvalores(JSONObject value){
        values.add(value);
     }
 

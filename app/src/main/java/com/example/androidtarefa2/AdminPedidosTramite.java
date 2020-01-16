@@ -14,6 +14,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import admin_adaptadores_recycler_view_ver_Pedidos_En_Tramite.Admin_Lista_pedidos_Tramite;
 import persistencia.BaseDatos;
 
@@ -77,18 +80,21 @@ public class AdminPedidosTramite extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
-                //recoger valores consulta
-                producto = cursor.getString(0);
-                cantidade = cursor.getString(1);
-                direccion = cursor.getString(2);
-                cidade = cursor.getString(3);
-                codigo_postal = cursor.getString(4);
-                id = cursor.getInt(5);
-                usuario = cursor.getString(6);
-                //TODO cambiar formato paso de datos
-                recycleAdapter.añadirvalores("_id" + id +"Usuario:  " + usuario +"\nProducto:  " +producto +
-                        "\nCantidade:  " + cantidade + " \nDirección: " +direccion +  " \nCidade:  " + cidade +
-                        "\nCódigo postal :  " + codigo_postal);//añadir valores a la lista
+                JSONObject data = new JSONObject(); //por simplicidad usaré un JsonObject
+                try { //recoger valores consulta
+                    data.put("producto", cursor.getString(0));
+                    data.put("cantidade", cursor.getString(1));
+                    data.put("direccion", cursor.getString(2));
+                    data.put("cidade", cursor.getString(3));
+                    data.put("codigo_postal", cursor.getString(4));
+                    data.put("id", cursor.getInt(5));
+                    data.put("usuario", cursor.getString(6));
+                    System.out.println("data " + data);
+                    recycleAdapter.añadirvalores(data);//añadir valores a la lista
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             } while (cursor.moveToNext());
         }
 
