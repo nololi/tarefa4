@@ -25,7 +25,7 @@ public class PedidosTramite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos_tramite);
 
-        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);//appBar
         setSupportActionBar(toolbar);
 
         usuario = getIntent().getExtras().getString("usuario");
@@ -52,7 +52,7 @@ public class PedidosTramite extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.atras){
+        if(item.getItemId()==R.id.atras){//botón atrás
             System.out.println("atrás");
             Intent intent = new Intent(getApplicationContext(), Cliente1Panel.class);
             intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
@@ -68,28 +68,28 @@ public class PedidosTramite extends AppCompatActivity {
 
 
     private void consultaPedidosTramite(Lista_pedidos_tramite recycleAdapter) {//EN_TRAMITE
-        System.out.println("consultar pedidos trámite");
-        System.out.println("\"select producto,cantidade,direccion,cidade,codigo_postal from COMPRAS where usuario='\" + usuario + \"' \" +\n" +
-                "                \"AND estado_pedido =\" + BaseDatos.EN_TRAMITE + \"\"");
         String producto;
         String cantidade;
         String direccion;
         String cidade;
         String codigo_postal;
 
-        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal from COMPRAS where usuario='" + usuario + "' " +
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal" +
+                " from COMPRAS where usuario='" + usuario + "' " +
                 "AND estado_pedido =" + BaseDatos.EN_TRAMITE + "", null);
 
         if (cursor.moveToFirst()) {
             do {
-                //almacenar valores
+                //obtención valores de la consulta
                 producto = cursor.getString(0);
                 cantidade = cursor.getString(1);
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
                 //añadir valores a la lista
-                recycleAdapter.añadirvalores(producto + " " + cantidade + " " + direccion + " " +cidade + " " +codigo_postal);
+                recycleAdapter.añadirvalores("Producto:  " + producto +
+                        "\nCantidade:   " + cantidade + " \nDirección :   " + direccion +
+                        " \nCidade : " +cidade + " \nCódigo Postal :  " +codigo_postal);
             } while (cursor.moveToNext());
         }
 

@@ -77,7 +77,7 @@ public class AdminPedidosTramite extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
-                //almacenar valores
+                //recoger valores consulta
                 producto = cursor.getString(0);
                 cantidade = cursor.getString(1);
                 direccion = cursor.getString(2);
@@ -85,8 +85,10 @@ public class AdminPedidosTramite extends AppCompatActivity {
                 codigo_postal = cursor.getString(4);
                 id = cursor.getInt(5);
                 usuario = cursor.getString(6);
-                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal + "  " + cursor.getInt(5));
-                recycleAdapter.añadirvalores("_id" + id +"Usuario:  " + usuario +"\nPedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
+                //TODO cambiar formato paso de datos
+                recycleAdapter.añadirvalores("_id" + id +"Usuario:  " + usuario +"\nProducto:  " +producto +
+                        "\nCantidade:  " + cantidade + " \nDirección: " +direccion +  " \nCidade:  " + cidade +
+                        "\nCódigo postal :  " + codigo_postal);//añadir valores a la lista
             } while (cursor.moveToNext());
         }
 

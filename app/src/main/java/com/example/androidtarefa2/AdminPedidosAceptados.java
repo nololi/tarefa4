@@ -22,13 +22,12 @@ public class AdminPedidosAceptados extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin__pedidos__aceptados);
-        //rvwRecycleView_Pedidos_Cliente_Aceptados
 
-        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back); //appBar
         setSupportActionBar(toolbar);
 
         Admin_Lista_Pedidos_Aceptados recycleAdapter = new Admin_Lista_Pedidos_Aceptados();
-        //iniciar lista a mostrar
+        //inicializar  valores lista a mostrar
         consultaPedidosAceptados(recycleAdapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -43,13 +42,13 @@ public class AdminPedidosAceptados extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_back,menu);
+        inflater.inflate(R.menu.menu_back, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.atras){
+        if (item.getItemId() == R.id.atras) { //botón atrás
             Intent intent = new Intent(getApplicationContext(), AdminPanel.class);
             intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
             intent.putExtra("nome", getIntent().getExtras().getString("nome"));
@@ -74,18 +73,18 @@ public class AdminPedidosAceptados extends AppCompatActivity {
         Cursor cursor = BaseDatos.operacionsBD.rawQuery("select producto,cantidade,direccion,cidade,codigo_postal,_id from COMPRAS WHERE " +
                 " estado_pedido =" + BaseDatos.ACEPTADO + "", null);
 
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) { //recorro la lista mientras haya valores
             do {
-                //almacenar valores
+                //almacenar valores recogidos
                 producto = cursor.getString(0);
                 cantidade = cursor.getString(1);
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
                 id = cursor.getInt(5);
-                System.out.println("Pedidos aceptados");
-                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal + "  " + cursor.getInt(5));
-                recycleAdapter.añadirvalores("_id" + id +" \nPedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
+                recycleAdapter.añadirvalores("idPedido:  " + id + " \nProducto:  " +
+                        producto + " \nCantidade:  " + cantidade + " \nDirección:   " +
+                        direccion + " \nCidade: " + cidade + " \nCP : " + codigo_postal);//añadir valores a la lista
             } while (cursor.moveToNext());
         }
 

@@ -50,13 +50,13 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         final String id2 = id.split("_id")[1];
 
 
-        //TODO ¿recarga página??
+        //TODO ¿recarga página tras click??
 
        Context context = viewHolderMeu.table.getContext();
 
        TableRow tableRow = new TableRow(context);
 
-        //FOPMATO
+        //FORMATO
         LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         parametros.setMargins(8,8,8,8);
 
@@ -91,20 +91,13 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
 
         LinearLayout layout = new LinearLayout(context);
-        //layout interno tamaño padre
-        //layout.setLayoutParams(parametros);
         layout.setOrientation(LinearLayout.VERTICAL);//1
         layout.addView(texto);
         layout.addView(btn_aceptar);
         layout.addView(btn_rexeitar);
 
 
-       // tableRow.addView(texto);
-        //tableRow.addView(btn_aceptar);
-        //tableRow.addView(btn_rexeitar);
-
         tableRow.addView(layout);
-
         viewHolderMeu.table.addView(tableRow);
 
 

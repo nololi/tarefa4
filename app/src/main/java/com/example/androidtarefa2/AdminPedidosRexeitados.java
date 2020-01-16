@@ -23,7 +23,7 @@ public class AdminPedidosRexeitados extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_pedidos_rexeitados);
 
-        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);//appBar
         setSupportActionBar(toolbar);
 
         Admin_Lista_Pedidos_Rexeitados recycleAdapter = new Admin_Lista_Pedidos_Rexeitados();
@@ -78,16 +78,17 @@ public class AdminPedidosRexeitados extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
-                //almacenar valores
+                //obtener valores de la query
                 producto = cursor.getString(0);
                 cantidade = cursor.getString(1);
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
                 id = cursor.getInt(5);
-                System.out.println("Pedidos rexeitados");
-                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal + "  " + cursor.getInt(5));
-                recycleAdapter.añadirvalores("_id" + id +" \nPedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
+                //añadir valores a la lista
+                recycleAdapter.añadirvalores("idPedido:   " + id +" \nProducto:  "
+                        +producto + " \nCantidade:   " + cantidade + " \nDirección:  "
+                        +direccion +  "\nCidade:  " + cidade + " \nCP:   " + codigo_postal);
             } while (cursor.moveToNext());
         }
 

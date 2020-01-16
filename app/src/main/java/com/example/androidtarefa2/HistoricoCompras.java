@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import adaptadores_recycler_view_pedidos_admitidos.Lista_pedidos_admitidos;
-import admin_adaptadores_recycler_view_ver_pedidos_aceptados.Admin_Lista_Pedidos_Aceptados;
 import persistencia.BaseDatos;
 
 public class HistoricoCompras extends AppCompatActivity {
@@ -24,7 +23,7 @@ public class HistoricoCompras extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historico_compras);
 
-        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);//appBar
         setSupportActionBar(toolbar);
 
 
@@ -49,9 +48,10 @@ public class HistoricoCompras extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.atras){
+        if(item.getItemId()==R.id.atras){//botón atrás
             System.out.println("atrás");
             Intent intent = new Intent(getApplicationContext(), Cliente1Panel.class);
+            //no hemos dado sesiones, así que le paso los datos para no repetir la consulta
             intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
             intent.putExtra("nome",getIntent().getExtras().getString("nome"));
             intent.putExtra("apelidos",getIntent().getExtras().getString("apelidos"));
@@ -78,16 +78,16 @@ public class HistoricoCompras extends AppCompatActivity {
 
         if (cursor.moveToFirst()) {
             do {
-                //almacenar valores
+                //obtención de valores de la consulta
                 producto = cursor.getString(0);
                 cantidade = cursor.getString(1);
                 direccion = cursor.getString(2);
                 cidade = cursor.getString(3);
                 codigo_postal = cursor.getString(4);
-               // id = cursor.getInt(5);
-                System.out.println("Pedidos aceptados usuario");
-                System.out.println(producto + " " + cantidade + direccion + cidade + codigo_postal );
-                recycleAdapter.añadirvalores("Pedido:" +producto + " " + cantidade + " " +direccion +  " " + cidade + " " + codigo_postal);//añadir valores a la lista
+                //añadir valores a la lista
+                recycleAdapter.añadirvalores("Producto:  " +producto +
+                        " \nCantidade:  " + cantidade + " \nDirección:  " +direccion +
+                        "\nCidade:   " + cidade + " \nCódigo Postal : " + codigo_postal);
             } while (cursor.moveToNext());
         }
 
