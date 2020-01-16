@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             } while(cursor.moveToNext());
         }
 
+        System.out.println(esAdmin);
 
         if(esAdmin==-1) { //si no hay valor, la consulta no ha devuelto nada
             int duration = Toast.LENGTH_SHORT;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearBD(){
-       // getApplicationContext().deleteDatabase(BaseDatos.NOME_BD);//control: borrado bd
+       //getApplicationContext().deleteDatabase(BaseDatos.NOME_BD);//control: borrado bd
         new BaseDatos(getApplicationContext(),BaseDatos.NOME_BD,null,BaseDatos.VERSION);
     }
 

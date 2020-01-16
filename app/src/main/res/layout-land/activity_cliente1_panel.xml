@@ -74,8 +74,8 @@
             android:id="@+id/pedidos_tramite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="verPedidosTramite"
             android:text="@string/pedidos_tramite"
+            android:onClick="verPedidos"
             android:textSize="8sp" />
 
         <Button

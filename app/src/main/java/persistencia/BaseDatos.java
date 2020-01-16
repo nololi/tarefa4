@@ -22,7 +22,8 @@ public class BaseDatos extends SQLiteOpenHelper {
         //guardado referencia a la base de datos
         SQLiteDatabase operacionsBD = this.getWritableDatabase();
         this.asigarSQLiteDatabase(operacionsBD);
-        //operacionsBD.execSQL("DROP TABLE IF EXISTS COMPRAS");
+       // operacionsBD.execSQL("DROP TABLE IF EXISTS COMPRAS");
+        //operacionsBD.execSQL("DROP TABLE IF EXISTS USUARIOS");
     }
 
     /*

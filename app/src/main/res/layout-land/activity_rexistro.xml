@@ -106,6 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:onClick="controlSeleccionTipoUsuario"
                     android:text="@string/usuario"
                     android:textSize="12sp" />
 
@@ -113,6 +114,7 @@
                     android:id="@+id/tipo_admin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="controlSeleccionTipoUsuario"
                     android:text="@string/administrador"
                     android:textSize="12sp" />
 
@@ -123,7 +125,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="rexistrar"
-                android:paddingBottom="8dp"
                 android:text="@string/rexistrarse" />
         </LinearLayout>
     </ScrollView>

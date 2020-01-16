@@ -68,6 +68,9 @@ public class PedidosTramite extends AppCompatActivity {
 
 
     private void consultaPedidosTramite(Lista_pedidos_tramite recycleAdapter) {//EN_TRAMITE
+        System.out.println("consultar pedidos trámite");
+        System.out.println("\"select producto,cantidade,direccion,cidade,codigo_postal from COMPRAS where usuario='\" + usuario + \"' \" +\n" +
+                "                \"AND estado_pedido =\" + BaseDatos.EN_TRAMITE + \"\"");
         String producto;
         String cantidade;
         String direccion;

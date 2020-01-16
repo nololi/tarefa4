@@ -8,7 +8,7 @@
     tools:context=".HacerPedido">
 
     <include
-        android:id="@+id/admin_layout_toolbar_back"
+        android:id="@+id/layout_toolbar_back"
         layout="@layout/toolbar_atras"/>
 
     <TableLayout

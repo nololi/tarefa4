@@ -38,7 +38,7 @@ public class HacerPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_pedido);
 
-        Toolbar toolbar = findViewById(R.id.admin_layout_toolbar_back);
+        Toolbar toolbar = findViewById(R.id.layout_toolbar_back);
         setSupportActionBar(toolbar);
 
         //asigno los elementos gráficos

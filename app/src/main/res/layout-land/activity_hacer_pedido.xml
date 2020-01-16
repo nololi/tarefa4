@@ -7,6 +7,11 @@
     android:background="#D7648DAF"
     tools:context=".HacerPedido">
 
+    <!--incluyo la toolbar también en las versiones horizontales-->
+    <include
+        android:id="@+id/layout_toolbar_back"
+        layout="@layout/toolbar_atras"/>
+
     <TableLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

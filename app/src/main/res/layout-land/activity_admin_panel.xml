@@ -7,13 +7,17 @@
     android:background="#D7648DAF"
     tools:context=".AdminPanel">
 
+    <include
+        android:id="@+id/admin_layout_toolbar"
+        layout="@layout/menu_admin"/>
+
     <LinearLayout
         android:id="@+id/datosusuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="58dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
@@ -46,6 +50,68 @@
             android:textColor="#FFFFFF"
             android:textSize="8sp"
             android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/botones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datosusuario">
+
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/pedidos_tramite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="verPedidosTramite"
+                    android:text="@string/pedidos_tramite"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/pedidos_aceptados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="verPedidosAceptados"
+                    android:text="@string/pedidos_aceptados"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/pedidos_rexeitados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="verPedidosRexeitados"
+                    android:text="@string/pedidos_rexeitados"
+                    android:textSize="10sp" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/sair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:foregroundGravity="center_horizontal"
+            android:onClick="salir"
+            android:text="@string/logout"
+            android:textSize="10sp" />
 
     </LinearLayout>
 
