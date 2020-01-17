@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import persistencia.BaseDatos;
 
@@ -28,6 +29,7 @@ import persistencia.BaseDatos;
 public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
     private static ArrayList<JSONObject> values = new ArrayList<>();
+    private ArrayList<JSONObject> copy = new ArrayList<>();
 
 
     @NonNull
@@ -47,7 +49,7 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
         final JSONObject object;
         String valores;
         try {
@@ -65,66 +67,36 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
         }
 
 
-        //TODO ¿recarga página tras click??
-        Admin_Carga_Pedidos_Tramite viewHolderMeu = (Admin_Carga_Pedidos_Tramite) viewHolder;
-       Context context = viewHolderMeu.table.getContext();
+        Admin_Carga_Pedidos_Tramite viewHolderPedidos = (Admin_Carga_Pedidos_Tramite) viewHolder;
+       viewHolderPedidos.texto.setText(valores);
+        viewHolderPedidos.btnRexeitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO
+                            + "' where _id='" + object.getString("id") + "'");
+                    values.remove(object);
+                    notifyItemRemoved(position);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-       TableRow tableRow = new TableRow(context);
 
-        //FORMATO
-        LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        parametros.setMargins(8,8,8,8);
-
-        //TEXTO A MOSTRAR
-        TextView texto = new TextView(context);
-        texto.setText(valores);
-        //ajusto el tamaño  al contenido del texto
-        texto.setLayoutParams(parametros);
-
-        //BOTON ACEPTAR
-        final Button btn_aceptar = new Button(context);
-        //ajusto el tamaño  al contenido del botón
-        btn_aceptar.setLayoutParams (parametros);
-        btn_aceptar.setText(R.string.aceptar_pedido);
-        btn_aceptar.setOnClickListener(new View.OnClickListener(){
+        });
+        viewHolderPedidos.btnAceptar.setOnClickListener(new View.OnClickListener(){
+            @Override
             public void onClick(View v) {
                 try {
                     BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO
                             +"' where _id='"+ object.getString("id") +"'");
+                    values.remove(object);
+                    notifyItemRemoved(position);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         });
-
-
-        //BOTON REXEITAR
-        Button btn_rexeitar = new Button(context);
-        //ajusto el tamaño  al contenido del botón
-        btn_rexeitar.setLayoutParams (parametros);
-        btn_rexeitar.setText(R.string.rexeitar_pedido);
-        btn_rexeitar.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                try {
-                    BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.REXEITADO
-                            +"' where _id='"+ object.getString("id") +"'");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        LinearLayout layout = new LinearLayout(context);
-        layout.setOrientation(LinearLayout.VERTICAL);//1
-        layout.addView(texto);
-        layout.addView(btn_aceptar);
-        layout.addView(btn_rexeitar);
-
-
-        tableRow.addView(layout);
-        viewHolderMeu.table.addView(tableRow);
 
 
     }
