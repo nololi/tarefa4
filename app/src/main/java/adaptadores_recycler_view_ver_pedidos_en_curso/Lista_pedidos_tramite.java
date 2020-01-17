@@ -40,8 +40,8 @@ public class Lista_pedidos_tramite extends RecyclerView.Adapter {
     //Este método recibe o ViewHolder do método anterior e asociamos a cada compoñente gráfico de dito View o dato que queremos que visualice
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        Carga_lista_pedidos_tramite viewHolderMeu = (Carga_lista_pedidos_tramite) viewHolder;
-        viewHolderMeu.itemTexto.setText(values.get(position));
+        Carga_lista_pedidos_tramite viewHolderPedidos = (Carga_lista_pedidos_tramite) viewHolder;
+        viewHolderPedidos.itemTexto.setText(values.get(position));
     }
 
     //Número de elementos de la lista

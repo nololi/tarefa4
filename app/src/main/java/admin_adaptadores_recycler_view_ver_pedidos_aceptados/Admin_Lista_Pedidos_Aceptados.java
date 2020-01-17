@@ -33,8 +33,8 @@ public class Admin_Lista_Pedidos_Aceptados extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        Admin_Carga_Pedidos_Aceptados viewHolderMeu = (Admin_Carga_Pedidos_Aceptados) viewHolder;
-        viewHolderMeu.texto.setText(values.get(position));
+        Admin_Carga_Pedidos_Aceptados viewHolderPedidos = (Admin_Carga_Pedidos_Aceptados) viewHolder;
+        viewHolderPedidos.texto.setText(values.get(position));
     }
 
     @Override

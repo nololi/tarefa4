@@ -34,8 +34,8 @@ public class Lista_pedidos_admitidos extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        Carga_lista_pedidos_admitidos viewHolderMeu = (Carga_lista_pedidos_admitidos) viewHolder;
-        viewHolderMeu.texto.setText(values.get(position));
+        Carga_lista_pedidos_admitidos viewHolderPedidos = (Carga_lista_pedidos_admitidos) viewHolder;
+        viewHolderPedidos.texto.setText(values.get(position));
     }
 
     @Override
