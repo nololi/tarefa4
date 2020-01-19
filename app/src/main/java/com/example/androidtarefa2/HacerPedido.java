@@ -82,7 +82,7 @@ public class HacerPedido extends AppCompatActivity {
         direccionPedido.putExtra("categoria", categoriaSeleccion.getSelectedItem().toString());
         direccionPedido.putExtra("producto", productosSeleccion.getSelectedItem().toString());
         direccionPedido.putExtra("cantidade", cantidadeSeleccion.getSelectedItem().toString());
-        //TODO revisar esta parte : paso los datos a la siguiente pantalla
+        //paso los datos a la siguiente pantalla por no hacer otra consulta a BD
         direccionPedido.putExtra("usuario", getIntent().getExtras().getString("usuario"));
         direccionPedido.putExtra("nome", getIntent().getExtras().getString("nome"));
         direccionPedido.putExtra("apelidos", getIntent().getExtras().getString("apelidos"));

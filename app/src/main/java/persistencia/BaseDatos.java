@@ -63,6 +63,7 @@ public class BaseDatos extends SQLiteOpenHelper {
     }
     //TODO destroy
 
+
     private void asigarSQLiteDatabase(SQLiteDatabase operacionsBD){
         BaseDatos.operacionsBD = operacionsBD;
     }

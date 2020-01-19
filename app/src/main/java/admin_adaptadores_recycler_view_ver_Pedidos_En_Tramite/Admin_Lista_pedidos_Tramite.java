@@ -2,7 +2,6 @@ package admin_adaptadores_recycler_view_ver_Pedidos_En_Tramite;
 
 import android.content.Context;
 import android.os.Build;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import persistencia.BaseDatos;
-
 
 public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
 
@@ -68,10 +66,12 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 try {
-                    BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO
+                    BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.REXEITADO
                             + "' where _id='" + object.getString("id") + "'");
-                    values.remove(object);
-                    notifyItemRemoved(position);
+                    //values.remove(object);
+                    //notifyItemRemoved(position);
+                    values.remove(position);
+                    notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -85,8 +85,11 @@ public class Admin_Lista_pedidos_Tramite extends RecyclerView.Adapter {
                 try {
                     BaseDatos.operacionsBD.execSQL("UPDATE COMPRAS SET estado_pedido='" + BaseDatos.ACEPTADO
                             +"' where _id='"+ object.getString("id") +"'");
-                    values.remove(object);
-                    notifyItemRemoved(position);
+                    //values.remove(object);
+                    //notifyItemRemoved(position);
+                    values.remove(position);
+                    notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
