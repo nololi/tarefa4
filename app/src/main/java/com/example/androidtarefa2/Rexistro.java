@@ -2,6 +2,7 @@ package com.example.androidtarefa2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -50,12 +51,9 @@ public class Rexistro extends AppCompatActivity {
                 " VALUES ('" + nome + "','" + apelidos + "','" + email + "','" + usuario + "','" + contrasinal + "'," + esAdmin + ") ";
         BaseDatos.operacionsBD.execSQL(insert);
 
-        //resetear campos
-        nomeText.setText("");
-        apelidosText.setText("");
-        emailText.setText("");
-        contrasinalText.setText("");
-        usuarioText.setText("");
+        //redirigir pantalla inicial
+        Intent pantalla_inicio = new Intent(this, MainActivity.class);
+        startActivity(pantalla_inicio);
     }
 
     public boolean consultarUsuario(String usuario) {
