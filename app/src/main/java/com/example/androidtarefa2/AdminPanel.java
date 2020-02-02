@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -28,6 +31,12 @@ public class AdminPanel extends AppCompatActivity {
         //recojo los valores enviados desde la página anterior y los añado
          nome = getIntent().getExtras().getString("nome");
          apelidos = getIntent().getExtras().getString("apelidos");
+
+        String rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
+        Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
+        ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
+        icono.setImageBitmap(bitmap);
+
         TextView datosCliente = findViewById(R.id.datosCliente);
         datosCliente.setText(nome + " " + apelidos);
     }

@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
             Intent panelAdmin = new Intent(this, AdminPanel.class);
             panelAdmin.putExtra("nome",nome); //nome
             panelAdmin.putExtra("apelidos",apelidos);//apelidos
+            panelAdmin.putExtra("rutaImaxe",imaxe);//imaxe
             startActivity(panelAdmin);
         }else{//user
             Intent hacerPedido = new Intent(this, Cliente1Panel.class);
