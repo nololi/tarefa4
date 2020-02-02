@@ -22,8 +22,8 @@ public class BaseDatos extends SQLiteOpenHelper {
         //guardado referencia a la base de datos
         SQLiteDatabase operacionsBD = this.getWritableDatabase();
         this.asigarSQLiteDatabase(operacionsBD);
-       // operacionsBD.execSQL("DROP TABLE IF EXISTS COMPRAS");
-        //operacionsBD.execSQL("DROP TABLE IF EXISTS USUARIOS");
+       //operacionsBD.execSQL("DROP TABLE IF EXISTS COMPRAS");
+       //operacionsBD.execSQL("DROP TABLE IF EXISTS USUARIOS");
     }
 
     /*
@@ -39,6 +39,8 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "email VARCHAR(50) NOT NULL,"+
                 "usuario VARCHAR(50) NOT NULL,"+
                 "contrasinal VARCHAR(50) NOT NULL,"+
+                //"imaxe BLOB NOT NULL,"+
+                "imaxe VARCHAR(200) NOT NULL,"+
                 "es_admin BOOLEAN NOT NULL)"; // 0= falso se almacenan como enteros
         db.execSQL(crear_taboa_usuarios);
 
@@ -55,6 +57,10 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "codigo_postal INTEGER(5) NOT NULL,"+
                 "estado_pedido INTEGER(1) NOT NULL)"; // 0 = trámite, 1 = aceptado, 2 = rexeitado
         db.execSQL(crear_taboa_compras);
+
+        //tabla imágenes
+       // String tabla_imagenes = "CREATE TABLE IMAGENES (id INTEGER PRIMARY KEY AUTOINCREMENT, img BLOB)";
+        //db.execSQL(tabla_imagenes);
     }
 
     @Override

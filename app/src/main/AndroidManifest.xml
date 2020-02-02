@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.androidtarefa2">
+    <!-- permiso de lectura sd, me falla, le he tenido que dar permisos también en android -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- permiso almacenamiento sd -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--permiso uso cámara -->
+    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
+    <!-- indico que la app  hará uso de la cámara -->
+   <!-- <uses-feature android:name="android.hardware.camera" android:required="true"/>-->
+    <!-- permiso uso de la cámara (no necesario si Intent-->
+    <!--<uses-permission android:name="android.permission.CAMERA" />-->
 
+    <!--cambio  android:requestLegacyExternalStorage="true"-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -35,6 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

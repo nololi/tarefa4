@@ -5,16 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.sql.Blob;
+
+import persistencia.BaseDatos;
 
 public class Cliente1Panel extends AppCompatActivity {
     private String nome;
     private String apelidos;
+   private String usuario;
+
 
 
     @Override
@@ -28,11 +38,61 @@ public class Cliente1Panel extends AppCompatActivity {
         //recojo los valores enviados desde la página anterior y los añado
         nome = getIntent().getExtras().getString("nome");
         apelidos = getIntent().getExtras().getString("apelidos");
+        usuario = getIntent().getExtras().getString("usuario");
+        String rutaImaxe = getIntent().getExtras().getString("rutaImaxe");
+
+        Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
+        ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
+        icono.setImageBitmap(bitmap);
+
+
+
+        //rutaImaxe = getIntent().getStringExtra("imaxe");
+
+      //  rutaImaxe = getIntent().getExtras().getString("imaxe");
+       /* rutaImaxe = getIntent().getExtras().getString("imaxe");
+        System.out.println("ruta imaxe " +getIntent().getExtras().getString("imaxe") );
+        Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);*/
+
+
+        //Bitmap bitmap = getIntent().getParcelableExtra("bitMap");
+       // ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
+        //icono.set
+       // icono.setImageBitmap(rutaImaxe);
+
+
+       // byte[] imaxe = getIntent().getExtras().getByteArray("imaxe");
+       // Bitmap bitmap = BitmapFactory.decodeByteArray(imaxe,0,imaxe.length);
+
+        //ImageView imaxeView = findViewById(R.id.fotoUsuario);
+        //imaxeView.setImageBitmap(bitmap);
+
+
         TextView datosCliente = findViewById(R.id.datosCliente);
         datosCliente.setText(nome + " " + apelidos);
 
 
     }
+
+    //cargo la imagen de perfil en el imageView
+    private void cargarImagen(){
+        //recojo la imagen de la base de datos
+            Cursor cursor = BaseDatos.operacionsBD.rawQuery("select imaxe from USUARIOS where usuario='" + usuario + "'", null);
+        if (cursor.moveToFirst()){
+            System.out.println("carga imaxe");
+            do {
+                System.out.println(cursor.getBlob(0));//blob
+                byte[] dataImx  = cursor.getBlob(0);
+                System.out.println("en la bd " + dataImx);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(dataImx, 0 ,dataImx.length);
+                System.out.println("Conversión " + bitmap);
+                ImageView imaxeView = findViewById(R.id.fotoUsuario);
+                imaxeView.setImageBitmap(bitmap);
+
+            } while(cursor.moveToNext());
+        }
+    }
+
 
 
     //sobreescribo método onCreateOptionsMenu

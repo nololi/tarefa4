@@ -5,10 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.ByteArrayInputStream;
+import java.sql.Blob;
 
 import persistencia.BaseDatos;
 
@@ -35,19 +40,32 @@ public class MainActivity extends AppCompatActivity {
         String nome="";
         String apelidos="";
         String usuario ="";
+        String imaxe ="";
+      //  byte[] imaxe = new byte[1];
+        
+        Bitmap bitmap = null;
+        //ByteArrayInputStream bais = null;
+
 
         //comprobar si existe el usuario
         Cursor cursor = consultarUsuario(user,pass);
         if (cursor.moveToFirst()){
-            do {
+          do {
                 //almacenar valores
                 nome= cursor.getString(0);
                 apelidos = cursor.getString(1);
                 esAdmin = cursor.getInt(2);
                 usuario = cursor.getString(3);
+                imaxe = cursor.getString(4);
+                //byte[] imaxe = cursor.getBlob(4);
+             // bais = new ByteArrayInputStream(imaxe);
+              //bitmap = BitmapFactory.decodeStream(bais);
+
+            //  byte[] blob = cursor.getBlob(4);
+
                 System.out.println(nome +  " " + apelidos + " " + esAdmin +" " + usuario);
-            } while(cursor.moveToNext());
-        }
+        } while(cursor.moveToNext());
+       }
 
         System.out.println(esAdmin);
 
@@ -65,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
             hacerPedido.putExtra("nome",nome);//nome
             hacerPedido.putExtra("apelidos",apelidos); //apelidos
             hacerPedido.putExtra("usuario",usuario); //usuario
+           // hacerPedido.putExtra("imaxe",bitmap);
+            //hacerPedido.putExtra("imaxe",blob);
+            hacerPedido.putExtra("rutaImaxe",imaxe);
             startActivity(hacerPedido);
         }
 
@@ -80,15 +101,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearBD(){
-       //getApplicationContext().deleteDatabase(BaseDatos.NOME_BD);//control: borrado bd
+     // getApplicationContext().deleteDatabase(BaseDatos.NOME_BD);//control: borrado bd
         new BaseDatos(getApplicationContext(),BaseDatos.NOME_BD,null,BaseDatos.VERSION);
     }
 
     //consultar si el usuario y contraseña existe
     public Cursor consultarUsuario(String usuario,String contrasinal){
-        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select nome,apelidos,es_admin,usuario from USUARIOS where usuario='"+usuario+"' " +
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select nome,apelidos,es_admin,usuario,imaxe from USUARIOS where usuario='"+usuario+"' " +
                 "AND contrasinal ='" + contrasinal +"'", null);
-        System.out.println("count" + cursor.getCount());
+        System.out.println("contador encontrado" + cursor.getCount());
         return cursor;
     }
 

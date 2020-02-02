@@ -39,6 +39,10 @@
     <string name="apelidos">Apelidos</string>
     <string name="email">Email</string>
     <string name="administrador">Administrador</string>
+    <string name="agregar_foto">Agregar foto</string>
+    <string name="obter_imaxe">Obter imaxe</string>
+    <string name="src_tarxeta">Subir dende a tarxeta</string>
+    <string name="src_camara">Subir dende a cámara</string>
     <!-- pantalla pedidos en trámite-->
     <string name="listado_tramite">Listado pedidos en trámite</string>
     <!-- pantalla administrador-->

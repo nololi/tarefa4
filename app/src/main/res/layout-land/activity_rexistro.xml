@@ -95,6 +95,36 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
+            <RadioGroup
+                android:id="@+id/seleccion_imaxe_src"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/tarxeta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="controlFonteImaxe"
+                    android:text="@string/src_tarxeta"
+                    android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/camara"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="controlFonteImaxe"
+                    android:text="@string/src_camara"
+                    android:textSize="12sp" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/engadir_foto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="subirImaxe"
+                android:text="@string/agregar_foto" />
 
             <RadioGroup
                 android:id="@+id/seleccion_tipo_usuario"
