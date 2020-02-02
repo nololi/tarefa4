@@ -31,11 +31,8 @@ public class Rexistro extends AppCompatActivity {
     private int esAdmin = 0;
     private ImageView image;
 
-
     private int esCamara = 1;//inicialmente es tarjeta
-    // private int referenciaBD;
-    //private Uri path;
-    private Bitmap bitmap;
+
     private final String RUTA_RAIZ = "imagenesAndroid/";
     private final String RUTA_FICHERO = RUTA_RAIZ + "fotosApp";
     private String rutaImagen;
@@ -82,18 +79,12 @@ public class Rexistro extends AppCompatActivity {
 
         //Si he llegado aquí no existe -> guardo
 
-
-        //System.out.println(bitmap);
         String insert = "INSERT INTO USUARIOS (nome,apelidos,email, usuario, contrasinal,imaxe,es_admin)" +
                 " VALUES ('" + nome + "','" + apelidos + "','" + email + "','" + usuario + "','" + contrasinal + "','" +
                 rutaImagen + "'," + esAdmin + ") ";
 
         System.out.println(insert);
         BaseDatos.operacionsBD.execSQL(insert);
-
-
-        //guardado imaxe
-        // guardarImaxe(path);
 
         //redirigir pantalla inicial
         Intent pantalla_inicio = new Intent(this, MainActivity.class);
@@ -136,19 +127,8 @@ public class Rexistro extends AppCompatActivity {
     //método cuando se pulsa el botón
     public void subirImaxe(View view) {
         System.out.println("Subir imaxe");
-
-
-
-       /* Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);*/
-       /* Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/");*/
-        //lanzo la app para recoger la imagen
-
-
         if (esCamara == 0) {
-            abrirCamara();
+            abrirCamara();//TODO
         } else {//cargar imagen
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             //será tipo imagen
@@ -157,24 +137,6 @@ public class Rexistro extends AppCompatActivity {
 
         }
 
-        //startActivityForResult(intent.createChooser(intent,"Seleccione"),esCamara);//TODO
-
-
-        //TODO guardar imagen
-
-
-       /* File ruta = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        File arquivo = new File(ruta,"nomeFoto");
-System.out.println(ruta);
-System.out.println(arquivo);
-
-
-        Intent intento = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        intento.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivo));
-
-       startActivityForResult(intento, interna);//camara TODO
-       */
     }
 
     @Override
@@ -197,31 +159,24 @@ System.out.println(arquivo);
                             }
                         });
 
-                //guardar en base de datos
-
 
             } else {//cargo de la galería
                 System.out.println("galería");
 
                 Uri path = data.getData();
-                // System.out.println(data.getDataString());
-                System.out.println(path.getPath());
                 image.setImageURI(path);//muestro la imagen en pantalla
 
 
                 //fuente:https://stackoverflow.com/questions/13209494/how-to-get-the-full-file-path-from-uri
                 try {
-                    rutaImagen=PathUtil.getPath(getApplicationContext(),path);
+                    rutaImagen = PathUtil.getPath(getApplicationContext(), path);
                     System.out.println("path util" + rutaImagen);
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
 
-                // File inputFile = new File(getPathFromUri(getApplicationContext(), path));
 
             }
-
-
 
 
         } else if (resultCode == RESULT_CANCELED) {
@@ -268,48 +223,6 @@ System.out.println(arquivo);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imagen));//necesario para poder enviar la imagen o almacenarla
         startActivityForResult(intent, 0);//código 0 si es cámara
     }
-/*
-    private void guardarImaxe(Uri path){
-        try {
-            //pasar a mapa de bits
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), path);
-            String insert = "INSERT INTO IMAGENES (img)" +
-                    " VALUES ('" + bitmap + "') ";
-            BaseDatos.operacionsBD.execSQL(insert); //guardar la imagen
-            // String select = "SELECT * FROM IMAGENES ORDER BY id DESC LIMIT 1";
-            String select = "SELECT * from IMAGENES";
-
-            Cursor cursor = BaseDatos.operacionsBD.rawQuery(select,null);
-            System.out.println("total elementos bd" + cursor.getCount());//TODO referencia bd o no guardar antes de confirmar
-            // referenciaBD =cursor.getInt(0);//posicion
-            //System.out.println(referenciaBD);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-    /*  @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        System.out.println("on activity result");
-
-         if(interna ==0){
-             System.out.println("Foto desde cámara");
-             return;
-         }
-         if(interna ==1){
-             System.out.println("Foto desde galería");
-             return;
-         }
-
-           super.onActivityResult(requestCode, resultCode, data);
-
-
-        //Bitmap bitMap = (Bitmap) data.getExtras().get("data");
-        //super.onActivityResult(requestCode, resultCode, data);
-
-
-    }
-    */
 
 
 }

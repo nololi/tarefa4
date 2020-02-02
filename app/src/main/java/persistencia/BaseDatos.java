@@ -39,7 +39,6 @@ public class BaseDatos extends SQLiteOpenHelper {
                 "email VARCHAR(50) NOT NULL,"+
                 "usuario VARCHAR(50) NOT NULL,"+
                 "contrasinal VARCHAR(50) NOT NULL,"+
-                //"imaxe BLOB NOT NULL,"+
                 "imaxe VARCHAR(200) NOT NULL,"+
                 "es_admin BOOLEAN NOT NULL)"; // 0= falso se almacenan como enteros
         db.execSQL(crear_taboa_usuarios);
