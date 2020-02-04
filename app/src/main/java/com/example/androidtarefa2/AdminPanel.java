@@ -33,7 +33,7 @@ public class AdminPanel extends AppCompatActivity {
          nome = getIntent().getExtras().getString("nome");
          apelidos = getIntent().getExtras().getString("apelidos");
 
-        rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
+        rutaImaxe = getIntent().getExtras().getString("rutaImaxe");
         Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
         ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
         icono.setImageBitmap(bitmap);

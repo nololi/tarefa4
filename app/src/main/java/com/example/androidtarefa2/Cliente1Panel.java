@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,10 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.sql.Blob;
-
-import persistencia.BaseDatos;
 
 public class Cliente1Panel extends AppCompatActivity {
     private String nome;
@@ -38,7 +33,7 @@ public class Cliente1Panel extends AppCompatActivity {
         nome = getIntent().getExtras().getString("nome");
         apelidos = getIntent().getExtras().getString("apelidos");
 
-        rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
+        rutaImaxe = getIntent().getExtras().getString("rutaImaxe");
         Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
         ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
         icono.setImageBitmap(bitmap);
