@@ -23,6 +23,7 @@ import persistencia.BaseDatos;
 public class Cliente1Panel extends AppCompatActivity {
     private String nome;
     private String apelidos;
+    private String rutaImaxe;
 
 
     @Override
@@ -37,7 +38,7 @@ public class Cliente1Panel extends AppCompatActivity {
         nome = getIntent().getExtras().getString("nome");
         apelidos = getIntent().getExtras().getString("apelidos");
 
-        String rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
+        rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
         Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
         ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
         icono.setImageBitmap(bitmap);
@@ -67,6 +68,7 @@ public class Cliente1Panel extends AppCompatActivity {
                 pedidosAceptados.putExtra("usuario", usuario);
                 pedidosAceptados.putExtra("nome", nome);
                 pedidosAceptados.putExtra("apelidos", apelidos);
+                pedidosAceptados.putExtra("rutaImaxe",rutaImaxe);
                 startActivity(pedidosAceptados);
                 return true;
             case R.id.item_pedidos_tramite:
@@ -74,6 +76,7 @@ public class Cliente1Panel extends AppCompatActivity {
                 pedidosRexeitados.putExtra("usuario", usuario);
                 pedidosRexeitados.putExtra("nome", nome);
                 pedidosRexeitados.putExtra("apelidos", apelidos);
+                pedidosRexeitados.putExtra("rutaImaxe",rutaImaxe);
                 startActivity(pedidosRexeitados);
                 return true;
             case R.id.item_compras_realizadas:
@@ -81,6 +84,7 @@ public class Cliente1Panel extends AppCompatActivity {
                 pedidos.putExtra("usuario", usuario);
                 pedidos.putExtra("nome", nome);
                 pedidos.putExtra("apelidos", apelidos);
+                pedidos.putExtra("rutaImaxe",rutaImaxe);
                 startActivity(pedidos);
                 return true;
         }
@@ -94,6 +98,7 @@ public class Cliente1Panel extends AppCompatActivity {
         nuevoPedido.putExtra("usuario", getIntent().getExtras().getString("usuario"));
         nuevoPedido.putExtra("nome", nome);
         nuevoPedido.putExtra("apelidos", apelidos);
+        nuevoPedido.putExtra("rutaImaxe",rutaImaxe);
         startActivity(nuevoPedido);
     }
 
@@ -103,6 +108,7 @@ public class Cliente1Panel extends AppCompatActivity {
         pedidos.putExtra("usuario", getIntent().getExtras().getString("usuario"));
         pedidos.putExtra("nome", nome);
         pedidos.putExtra("apelidos", apelidos);
+        pedidos.putExtra("rutaImaxe",rutaImaxe);
         startActivity(pedidos);
     }
 
@@ -112,6 +118,7 @@ public class Cliente1Panel extends AppCompatActivity {
         historicoCompras.putExtra("usuario", getIntent().getExtras().getString("usuario"));
         historicoCompras.putExtra("nome", nome);
         historicoCompras.putExtra("apelidos", apelidos);
+        historicoCompras.putExtra("rutaImaxe",rutaImaxe);
         startActivity(historicoCompras);
     }
 

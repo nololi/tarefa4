@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class AdminPanel extends AppCompatActivity {
     private String nome;
     private String apelidos;
+    private String rutaImaxe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class AdminPanel extends AppCompatActivity {
          nome = getIntent().getExtras().getString("nome");
          apelidos = getIntent().getExtras().getString("apelidos");
 
-        String rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
+        rutaImaxe = getIntent().getExtras().getString("rutaImaxe");//TODO comprobar cuando vuelvo de otra pantalla
         Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
         ImageView icono = (ImageView) findViewById(R.id.fotoUsuario);
         icono.setImageBitmap(bitmap);
@@ -59,6 +60,7 @@ public class AdminPanel extends AppCompatActivity {
                 pedidosAceptados.putExtra("usuario",usuario);
                 pedidosAceptados.putExtra("nome",nome);
                 pedidosAceptados.putExtra("apelidos",apelidos);
+                pedidosAceptados.putExtra("rutaImaxe",rutaImaxe);
                 startActivity(pedidosAceptados);
                 return true;
             case R.id.item_pedidos_rexeitados:
@@ -66,6 +68,7 @@ public class AdminPanel extends AppCompatActivity {
                 pedidosRexeitados.putExtra("usuario",usuario);
                 pedidosRexeitados.putExtra("nome",nome);
                 pedidosRexeitados.putExtra("apelidos",apelidos);
+                pedidosRexeitados.putExtra("rutaImaxe",rutaImaxe);
                 startActivity(pedidosRexeitados);
                 return true;
             case R.id.item_pedidos_tramite:
@@ -73,6 +76,7 @@ public class AdminPanel extends AppCompatActivity {
                 pedidos.putExtra("usuario",usuario);
                 pedidos.putExtra("nome",nome);
                 pedidos.putExtra("apelidos",apelidos);
+                pedidos.putExtra("rutaImaxe",rutaImaxe);
                 startActivity(pedidos);
                 return true;
         }
@@ -85,6 +89,7 @@ public class AdminPanel extends AppCompatActivity {
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         pedidos.putExtra("nome",nome);
         pedidos.putExtra("apelidos",apelidos);
+        pedidos.putExtra("rutaImaxe",rutaImaxe);
         startActivity(pedidos);
     }
 
@@ -94,6 +99,7 @@ public class AdminPanel extends AppCompatActivity {
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         pedidos.putExtra("nome",nome);
         pedidos.putExtra("apelidos",apelidos);
+        pedidos.putExtra("rutaImaxe",rutaImaxe);
         startActivity(pedidos);
     }
 
@@ -103,6 +109,7 @@ public class AdminPanel extends AppCompatActivity {
         pedidos.putExtra("usuario",getIntent().getExtras().getString("usuario"));
         pedidos.putExtra("nome",nome);
         pedidos.putExtra("apelidos",apelidos);
+        pedidos.putExtra("rutaImaxe",rutaImaxe);
         startActivity(pedidos);
     }
 

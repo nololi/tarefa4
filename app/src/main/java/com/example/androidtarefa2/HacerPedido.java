@@ -62,11 +62,11 @@ public class HacerPedido extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId()==R.id.atras){
-            System.out.println("atrás");
             Intent intent = new Intent(getApplicationContext(), Cliente1Panel.class);
             intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
             intent.putExtra("nome",getIntent().getExtras().getString("nome"));
             intent.putExtra("apelidos",getIntent().getExtras().getString("apelidos"));
+            intent.putExtra("rutaImaxe",getIntent().getExtras().getString("rutaImaxe"));
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             return true;
@@ -86,6 +86,7 @@ public class HacerPedido extends AppCompatActivity {
         direccionPedido.putExtra("usuario", getIntent().getExtras().getString("usuario"));
         direccionPedido.putExtra("nome", getIntent().getExtras().getString("nome"));
         direccionPedido.putExtra("apelidos", getIntent().getExtras().getString("apelidos"));
+        direccionPedido.putExtra("rutaImaxe",getIntent().getExtras().getString("rutaImaxe"));
 
         startActivity(direccionPedido);
     }

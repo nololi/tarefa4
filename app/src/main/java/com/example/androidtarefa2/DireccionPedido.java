@@ -59,6 +59,7 @@ public class DireccionPedido extends AppCompatActivity {
             intent.putExtra("usuario", getIntent().getExtras().getString("usuario"));
             intent.putExtra("nome",getIntent().getExtras().getString("nome"));
             intent.putExtra("apelidos",getIntent().getExtras().getString("apelidos"));
+            intent.putExtra("rutaImaxe",getIntent().getExtras().getString("rutaImaxe"));
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             return true;
@@ -136,6 +137,7 @@ public class DireccionPedido extends AppCompatActivity {
         intent.putExtra("usuario", usuario);
         intent.putExtra("nome", getIntent().getExtras().getString("nome"));
         intent.putExtra("apelidos", getIntent().getExtras().getString("apelidos"));
+        intent.putExtra("rutaImaxe",getIntent().getExtras().getString("rutaImaxe"));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
