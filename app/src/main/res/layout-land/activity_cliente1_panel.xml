@@ -63,6 +63,14 @@
         app:layout_constraintTop_toBottomOf="@+id/datosUsuario">
 
         <Button
+            android:id="@+id/cambioDatos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="modificarDatos"
+            android:text="@string/cambio_datos"
+            android:textSize="8sp"/>
+
+        <Button
             android:id="@+id/facerPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

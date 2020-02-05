@@ -77,12 +77,20 @@
                 android:layout_height="match_parent" >
 
                 <Button
+                    android:id="@+id/cambioDatos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="modificarDatos"
+                    android:text="@string/cambio_datos"
+                    android:textSize="8sp"/>
+
+                <Button
                     android:id="@+id/pedidos_tramite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="verPedidosTramite"
                     android:text="@string/pedidos_tramite"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
                 <Button
                     android:id="@+id/pedidos_aceptados"
@@ -90,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="verPedidosAceptados"
                     android:text="@string/pedidos_aceptados"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
 
                 <Button
                     android:id="@+id/pedidos_rexeitados"
@@ -98,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:onClick="verPedidosRexeitados"
                     android:text="@string/pedidos_rexeitados"
-                    android:textSize="10sp" />
+                    android:textSize="8sp" />
             </TableRow>
 
         </TableLayout>

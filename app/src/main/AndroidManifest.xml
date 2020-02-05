@@ -8,14 +8,15 @@
     <!--permiso uso cámara -->
     <!--<uses-permission android:name="android.permission.CAMERA"/>-->
     <!-- indico que la app  hará uso de la cámara -->
-   <!-- <uses-feature android:name="android.hardware.camera" android:required="true"/>-->
+    <!--<uses-feature android:name="android.hardware.camera" android:required="true"/>-->
     <!-- permiso uso de la cámara (no necesario si Intent-->
     <!--<uses-permission android:name="android.permission.CAMERA" />-->
 
-    <!--cambio  android:requestLegacyExternalStorage="true"-->
+    <!--cambio sino da error al guardar con el uso cámara android:requestLegacyExternalStorage="true"-->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"

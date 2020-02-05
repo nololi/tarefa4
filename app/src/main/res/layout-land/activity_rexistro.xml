@@ -31,6 +31,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                tools:srcCompat="@mipmap/ic_launcher_round" />
+
             <TextView
                 android:id="@+id/nome"
                 android:layout_width="match_parent"
@@ -95,6 +101,25 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/contrasinalRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repetir_contrasinal" />
+            <EditText
+                android:id="@+id/contrasinalRepeatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/Imagen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/obter_imaxe" />
+
+
             <RadioGroup
                 android:id="@+id/seleccion_imaxe_src"
                 android:layout_width="match_parent"
@@ -155,6 +180,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="rexistrar"
+                android:layout_marginBottom="8dp"
                 android:text="@string/rexistrarse" />
         </LinearLayout>
     </ScrollView>
