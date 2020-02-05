@@ -15,7 +15,9 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +29,21 @@ import persistencia.BaseDatos;
 
 public class Rexistro extends AppCompatActivity {
     private int esAdmin = 0;
+    //campos del registro
     private ImageView image;
+    private TextView nomeText;
+    private TextView apelidosText;
+    private TextView emailText;
+    private TextView usuarioText;
+    private TextView contrasinalText;
+    private TextView contrasinalRepeatCampo;
+    private TextView contrasinalRepeatText;
+    private RadioButton cliente;
+    private RadioButton administrador;
+    private Button btnRegistroModificacion;
+
+    //campo de la constraseña antiguar
+    private String contrasinalAlmacenada;
 
     private int esCamara = 1;//inicialmente es tarjeta
 
@@ -38,41 +54,135 @@ public class Rexistro extends AppCompatActivity {
     private static final String TAG = "Rexistro";
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rexistro);
+
+        //campos
+        nomeText = findViewById(R.id.nomeText);
+        apelidosText = findViewById(R.id.apelidosText);
+        emailText = findViewById(R.id.emailText);
+        usuarioText = findViewById(R.id.usuarioText);
+        contrasinalText = findViewById(R.id.contrasinalText);
+        cliente = findViewById(R.id.tipo_cliente);
+        administrador = findViewById(R.id.tipo_admin);
+        contrasinalRepeatCampo = findViewById(R.id.contrasinalRepeat);
+        contrasinalRepeatText = findViewById(R.id.contrasinalRepeatText);
+        btnRegistroModificacion = findViewById(R.id.registro);
 
         //imagen
         image = findViewById(R.id.imagen);
 
         //crear rutas imágenes si no existen
         File file = new File(RUTA_FICHERO);
-        if (!file.exists()){
+        if (!file.exists()) {
             file.mkdirs();
-            Log.i(TAG,"creada ruta "+ file.getAbsolutePath());
+            Log.i(TAG, "creada ruta " + file.getAbsolutePath());
         }
+
+
+        //si vengo de modificación de datos, cargo los datos del cliente
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            String usuario = getIntent().getExtras().getString("usuario");
+            btnRegistroModificacion.setText("Modificar");
+            cargaDatos(usuario);
+        }else{//si estoy en registro no quiero que se vean los campos
+            contrasinalRepeatCampo.setVisibility(View.INVISIBLE);
+            contrasinalRepeatText.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    //si vengo del panel (no es registro) cargo los datos
+    private void cargaDatos(String usuario) {
+        Cursor cursor = BaseDatos.operacionsBD.rawQuery("select nome,apelidos,es_admin,imaxe,contrasinal,email from USUARIOS where usuario='" + usuario + "' "
+                , null);
+        if (cursor.moveToFirst()) {
+            do {
+                //almacenar valores
+                nomeText.setText(cursor.getString(0));
+                apelidosText.setText(cursor.getString(1));
+                usuarioText.setText(usuario);
+                usuarioText.setEnabled(false);//no puedo editar el campo
+
+                //esAdmin = cursor.getInt(2); //si es admin marca
+                if(Integer.parseInt(cursor.getString(2))==1){
+                    System.out.println("es admin");
+                    administrador.setChecked(true);
+                    cliente.setChecked(false);
+
+                }else{
+                    System.out.println("es usuario");
+                    administrador.setChecked(false);
+                    cliente.setChecked(true);
+                }
+
+                //imagen
+                rutaImagen = cursor.getString(3);
+                Bitmap bitmap = BitmapFactory.decodeFile(rutaImagen);
+                image.setImageBitmap(bitmap);
+                //contrasinal
+                contrasinalAlmacenada=cursor.getString(4);
+                contrasinalText.setText(contrasinalAlmacenada);
+                contrasinalRepeatText.setText(contrasinalAlmacenada);
+                emailText.setText(cursor.getString(5));
+            } while (cursor.moveToNext());
+        }
+        System.out.println(usuario);
+
     }
 
     /*Al pulsar botón rexistro*/
     public void rexistrar(View view) {
         //campos del registro
-        TextView nomeText = findViewById(R.id.nomeText);
+
         String nome = nomeText.getText().toString();
 
-        TextView apelidosText = findViewById(R.id.apelidosText);
+
         String apelidos = apelidosText.getText().toString();
 
-        TextView emailText = findViewById(R.id.emailText);
+
         String email = emailText.getText().toString();
 
-        TextView usuarioText = findViewById(R.id.usuarioText);
+
         String usuario = usuarioText.getText().toString();
 
-        TextView contrasinalText = findViewById(R.id.contrasinalText);
+
         String contrasinal = contrasinalText.getText().toString(); //no codificado
 
+
+
+
+        if(contrasinalAlmacenada!=null){
+            String contrasinalRepeat = contrasinalRepeatText.getText().toString();
+            if(!contrasinalRepeat.equals(contrasinal)){
+                Log.e(TAG,"Las contraseñas no coinciden");
+                Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            //TODO actualizar solo campos modificados
+            String update = "UPDATE USUARIOS SET nome = '"+ nome +"'," +
+                    " apelidos ='" + apelidos+"',"+
+                    " email ='" + email+"',"+
+                    " contrasinal ='" + contrasinalRepeat+"',"+
+                    " imaxe ='" + rutaImagen+"'," +
+                    " es_admin ='" + esAdmin+"'"+
+                    " WHERE usuario = '" + usuario +"'";
+            BaseDatos.operacionsBD.execSQL(update);
+            Log.i(TAG,"Se han actualizado los datos del usuario " + usuario);
+
+            //regreso a mi pantalla : cliente o administrador
+                Intent pantalla = new Intent(this,(esAdmin==0? Cliente1Panel.class : AdminPanel.class));
+                pantalla.putExtra("nome",nome);//nome
+                pantalla.putExtra("apelidos",apelidos); //apelidos
+                pantalla.putExtra("usuario",usuario); //usuario
+                pantalla.putExtra("rutaImaxe",rutaImagen);
+                startActivity(pantalla);
+                return;
+
+        }
+        //si no he salido, no es modificación es registro ->
 
         //realizo una consulta contra la bd con ese usuario si existe
         if (consultarUsuario(usuario)) {//si el usuario existe
@@ -81,7 +191,7 @@ public class Rexistro extends AppCompatActivity {
         }
 
         //Si he llegado aquí no existe -> guardo
-        Log.i(TAG,"Guardo nuevo usuario");
+        Log.i(TAG, "Guardo nuevo usuario");
         String insert = "INSERT INTO USUARIOS (nome,apelidos,email, usuario, contrasinal,imaxe,es_admin)" +
                 " VALUES ('" + nome + "','" + apelidos + "','" + email + "','" + usuario + "','" + contrasinal + "','" +
                 rutaImagen + "'," + esAdmin + ") ";
@@ -127,10 +237,10 @@ public class Rexistro extends AppCompatActivity {
     //método cuando se pulsa el botón
     public void subirImaxe(View view) {
         if (esCamara == 0) {
-            Log.i(TAG,"Selección uso cámara");
+            Log.i(TAG, "Selección uso cámara");
             abrirCamara();//TODO
         } else {//cargar imagen
-            Log.i(TAG,"Selección imaxe galería");
+            Log.i(TAG, "Selección imaxe galería");
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             //será tipo imagen
             intent.setType("image/");
@@ -152,7 +262,7 @@ public class Rexistro extends AppCompatActivity {
 
                             @Override //método para comprobar si el proceso terminó completamente
                             public void onScanCompleted(String rutaImagen, Uri uri) {
-                                Log.i(TAG,"Imagen cámara se cargó correctamente");
+                                Log.i(TAG, "Imagen cámara se cargó correctamente");
                             }
                         });
 
@@ -163,19 +273,19 @@ public class Rexistro extends AppCompatActivity {
                 //fuente:https://stackoverflow.com/questions/13209494/how-to-get-the-full-file-path-from-uri
                 try {
                     rutaImagen = PathUtil.getPath(getApplicationContext(), path);
-                    Log.i(TAG,"Imagen se cargó correctamente ruta "+ rutaImagen);
+                    Log.i(TAG, "Imagen se cargó correctamente ruta " + rutaImagen);
                     //TODO mejora: clonar las imágenes en directorio app
                 } catch (URISyntaxException e) {
-                    Log.e(TAG,"Imagen no se cargó correctamente ruta "+ rutaImagen);
+                    Log.e(TAG, "Imagen no se cargó correctamente ruta " + rutaImagen);
                     e.printStackTrace();
                 }
 
 
             }
         } else if (resultCode == RESULT_CANCELED) {
-            Log.e(TAG,"Proceso cancelado");
+            Log.e(TAG, "Proceso cancelado");
         } else {
-            Log.e(TAG,"Fallo al cargar imagen");
+            Log.e(TAG, "Fallo al cargar imagen");
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -189,10 +299,10 @@ public class Rexistro extends AppCompatActivity {
         boolean isCreada = fileImagen.exists();//si existe
         if (!isCreada) {
             isCreada = fileImagen.mkdirs();
-            Log.i(TAG,"Creada ruta fichero externo " + fileImagen.getAbsolutePath());
+            Log.i(TAG, "Creada ruta fichero externo " + fileImagen.getAbsolutePath());
         }
         if (isCreada) {
-            nombreImagen = new Date().getTime()+"imagen.jpg";
+            nombreImagen = new Date().getTime() + "imagen.jpg";
         }
 
         //ruta

@@ -102,6 +102,19 @@
                 android:inputType="textPassword" />
 
             <TextView
+                android:id="@+id/contrasinalRepeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repetir_contrasinal" />
+
+            <EditText
+                android:id="@+id/contrasinalRepeatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword" />
+
+            <TextView
                 android:id="@+id/Imagen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,6 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="rexistrar"
+                android:layout_marginBottom="8dp"
                 android:text="@string/rexistrarse" />
         </LinearLayout>
     </ScrollView>

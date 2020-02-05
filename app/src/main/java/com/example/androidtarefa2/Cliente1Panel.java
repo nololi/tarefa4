@@ -19,6 +19,7 @@ public class Cliente1Panel extends AppCompatActivity {
     private String nome;
     private String apelidos;
     private String rutaImaxe;
+    private String usuario;
 
 
     @Override
@@ -32,6 +33,7 @@ public class Cliente1Panel extends AppCompatActivity {
         //recojo los valores enviados desde la página anterior y los añado
         nome = getIntent().getExtras().getString("nome");
         apelidos = getIntent().getExtras().getString("apelidos");
+        usuario = getIntent().getExtras().getString("usuario");
 
         rutaImaxe = getIntent().getExtras().getString("rutaImaxe");
         Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
@@ -56,7 +58,7 @@ public class Cliente1Panel extends AppCompatActivity {
     //sobrescribo método onOptionsItemSelected, y redirijo a cada opción
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        String usuario = getIntent().getExtras().getString("usuario");
+
         switch (item.getItemId()) {
             case R.id.item_facer_pedido:
                 Intent pedidosAceptados = new Intent(this, HacerPedido.class);
@@ -87,10 +89,18 @@ public class Cliente1Panel extends AppCompatActivity {
     }
 
 
+    //modificar datos
+    public void modificarDatos(View view){
+        System.out.println("Modificar datos");
+        Intent intent = new Intent(this, Rexistro.class );
+        intent.putExtra("usuario", usuario);
+        startActivity(intent);
+    }
+
     //Hacer nuevos pedidos
     public void hacerPedidos(View view) {
         Intent nuevoPedido = new Intent(this, HacerPedido.class);
-        nuevoPedido.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+        nuevoPedido.putExtra("usuario", usuario);
         nuevoPedido.putExtra("nome", nome);
         nuevoPedido.putExtra("apelidos", apelidos);
         nuevoPedido.putExtra("rutaImaxe",rutaImaxe);
@@ -100,7 +110,7 @@ public class Cliente1Panel extends AppCompatActivity {
     //Ver pedidos
     public void verPedidos(View view) {
         Intent pedidos = new Intent(this, PedidosTramite.class);
-        pedidos.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+        pedidos.putExtra("usuario", usuario);
         pedidos.putExtra("nome", nome);
         pedidos.putExtra("apelidos", apelidos);
         pedidos.putExtra("rutaImaxe",rutaImaxe);
@@ -110,7 +120,7 @@ public class Cliente1Panel extends AppCompatActivity {
     //Ver compras realizadas
     public void mostrarHistóricoCompras(View view) {
         Intent historicoCompras = new Intent(this, HistoricoCompras.class);
-        historicoCompras.putExtra("usuario", getIntent().getExtras().getString("usuario"));
+        historicoCompras.putExtra("usuario",usuario);
         historicoCompras.putExtra("nome", nome);
         historicoCompras.putExtra("apelidos", apelidos);
         historicoCompras.putExtra("rutaImaxe",rutaImaxe);

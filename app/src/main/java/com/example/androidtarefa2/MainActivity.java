@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearBD(){
-     // getApplicationContext().deleteDatabase(BaseDatos.NOME_BD);//control: borrado bd
+     //getApplicationContext().deleteDatabase(BaseDatos.NOME_BD);//control: borrado bd
         new BaseDatos(getApplicationContext(),BaseDatos.NOME_BD,null,BaseDatos.VERSION);
     }
 
