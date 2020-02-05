@@ -91,7 +91,6 @@ public class Cliente1Panel extends AppCompatActivity {
 
     //modificar datos
     public void modificarDatos(View view){
-        System.out.println("Modificar datos");
         Intent intent = new Intent(this, Rexistro.class );
         intent.putExtra("usuario", usuario);
         startActivity(intent);

@@ -58,15 +58,16 @@ public class MainActivity extends AppCompatActivity {
             Intent panelAdmin = new Intent(this, AdminPanel.class);
             panelAdmin.putExtra("nome",nome); //nome
             panelAdmin.putExtra("apelidos",apelidos);//apelidos
+            panelAdmin.putExtra("usuario",usuario); //usuario
             panelAdmin.putExtra("rutaImaxe",imaxe);//imaxe
             startActivity(panelAdmin);
         }else{//user
-            Intent hacerPedido = new Intent(this, Cliente1Panel.class);
-            hacerPedido.putExtra("nome",nome);//nome
-            hacerPedido.putExtra("apelidos",apelidos); //apelidos
-            hacerPedido.putExtra("usuario",usuario); //usuario
-            hacerPedido.putExtra("rutaImaxe",imaxe);
-            startActivity(hacerPedido);
+            Intent panelCliente = new Intent(this, Cliente1Panel.class);
+            panelCliente.putExtra("nome",nome);//nome
+            panelCliente.putExtra("apelidos",apelidos); //apelidos
+            panelCliente.putExtra("usuario",usuario); //usuario
+            panelCliente.putExtra("rutaImaxe",imaxe);
+            startActivity(panelCliente);
         }
 
         //reseteo los valores  y pongo el foco en el primer campo

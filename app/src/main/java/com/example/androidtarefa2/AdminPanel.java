@@ -20,6 +20,7 @@ public class AdminPanel extends AppCompatActivity {
     private String nome;
     private String apelidos;
     private String rutaImaxe;
+    private String usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class AdminPanel extends AppCompatActivity {
         //recojo los valores enviados desde la página anterior y los añado
          nome = getIntent().getExtras().getString("nome");
          apelidos = getIntent().getExtras().getString("apelidos");
+        usuario = getIntent().getExtras().getString("usuario");
 
         rutaImaxe = getIntent().getExtras().getString("rutaImaxe");
         Bitmap bitmap = BitmapFactory.decodeFile(rutaImaxe);
@@ -81,6 +83,13 @@ public class AdminPanel extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //modificar datos
+    public void modificarDatos(View view){
+        Intent intent = new Intent(this, Rexistro.class );
+        intent.putExtra("usuario", usuario);
+        startActivity(intent);
     }
 
     //Ver pedidos en trámite

@@ -28,7 +28,7 @@ import java.util.Date;
 import persistencia.BaseDatos;
 
 public class Rexistro extends AppCompatActivity {
-    private int esAdmin = 0;
+    private int esAdmin;
     //campos del registro
     private ImageView image;
     private TextView nomeText;
@@ -87,9 +87,10 @@ public class Rexistro extends AppCompatActivity {
             String usuario = getIntent().getExtras().getString("usuario");
             btnRegistroModificacion.setText("Modificar");
             cargaDatos(usuario);
-        }else{//si estoy en registro no quiero que se vean los campos
+        } else {//si estoy en registro no quiero que se vean los campos y el valor esAdmin es 1 = usuario
             contrasinalRepeatCampo.setVisibility(View.INVISIBLE);
             contrasinalRepeatText.setVisibility(View.INVISIBLE);
+            esAdmin=1;
         }
     }
 
@@ -106,12 +107,12 @@ public class Rexistro extends AppCompatActivity {
                 usuarioText.setEnabled(false);//no puedo editar el campo
 
                 //esAdmin = cursor.getInt(2); //si es admin marca
-                if(Integer.parseInt(cursor.getString(2))==1){
+                if (Integer.parseInt(cursor.getString(2)) == 1) {
                     System.out.println("es admin");
                     administrador.setChecked(true);
                     cliente.setChecked(false);
 
-                }else{
+                } else {
                     System.out.println("es usuario");
                     administrador.setChecked(false);
                     cliente.setChecked(true);
@@ -122,7 +123,7 @@ public class Rexistro extends AppCompatActivity {
                 Bitmap bitmap = BitmapFactory.decodeFile(rutaImagen);
                 image.setImageBitmap(bitmap);
                 //contrasinal
-                contrasinalAlmacenada=cursor.getString(4);
+                contrasinalAlmacenada = cursor.getString(4);
                 contrasinalText.setText(contrasinalAlmacenada);
                 contrasinalRepeatText.setText(contrasinalAlmacenada);
                 emailText.setText(cursor.getString(5));
@@ -135,51 +136,39 @@ public class Rexistro extends AppCompatActivity {
     /*Al pulsar botón rexistro*/
     public void rexistrar(View view) {
         //campos del registro
-
         String nome = nomeText.getText().toString();
-
-
         String apelidos = apelidosText.getText().toString();
-
-
         String email = emailText.getText().toString();
-
-
         String usuario = usuarioText.getText().toString();
-
-
         String contrasinal = contrasinalText.getText().toString(); //no codificado
 
-
-
-
-        if(contrasinalAlmacenada!=null){
+        if (contrasinalAlmacenada != null) {//es modificación
             String contrasinalRepeat = contrasinalRepeatText.getText().toString();
-            if(!contrasinalRepeat.equals(contrasinal)){
-                Log.e(TAG,"Las contraseñas no coinciden");
+            if (!contrasinalRepeat.equals(contrasinal)) {
+                Log.e(TAG, "Las contraseñas no coinciden");
                 Toast.makeText(getApplicationContext(), "Las contraseñas no coinciden", Toast.LENGTH_LONG).show();
                 return;
             }
 
             //TODO actualizar solo campos modificados
-            String update = "UPDATE USUARIOS SET nome = '"+ nome +"'," +
-                    " apelidos ='" + apelidos+"',"+
-                    " email ='" + email+"',"+
-                    " contrasinal ='" + contrasinalRepeat+"',"+
-                    " imaxe ='" + rutaImagen+"'," +
-                    " es_admin ='" + esAdmin+"'"+
-                    " WHERE usuario = '" + usuario +"'";
+            String update = "UPDATE USUARIOS SET nome = '" + nome + "'," +
+                    " apelidos ='" + apelidos + "'," +
+                    " email ='" + email + "'," +
+                    " contrasinal ='" + contrasinalRepeat + "'," +
+                    " imaxe ='" + rutaImagen + "'," +
+                    " es_admin ='" + esAdmin + "'" +
+                    " WHERE usuario = '" + usuario + "'";
             BaseDatos.operacionsBD.execSQL(update);
-            Log.i(TAG,"Se han actualizado los datos del usuario " + usuario);
+            Log.i(TAG, "Se han actualizado los datos del usuario " + usuario);
 
             //regreso a mi pantalla : cliente o administrador
-                Intent pantalla = new Intent(this,(esAdmin==0? Cliente1Panel.class : AdminPanel.class));
-                pantalla.putExtra("nome",nome);//nome
-                pantalla.putExtra("apelidos",apelidos); //apelidos
-                pantalla.putExtra("usuario",usuario); //usuario
-                pantalla.putExtra("rutaImaxe",rutaImagen);
-                startActivity(pantalla);
-                return;
+            Intent pantalla = new Intent(this, (esAdmin == 0 ? Cliente1Panel.class : AdminPanel.class));
+            pantalla.putExtra("nome", nome);//nome
+            pantalla.putExtra("apelidos", apelidos); //apelidos
+            pantalla.putExtra("usuario", usuario); //usuario
+            pantalla.putExtra("rutaImaxe", rutaImagen);
+            startActivity(pantalla);
+            return;
 
         }
         //si no he salido, no es modificación es registro ->
