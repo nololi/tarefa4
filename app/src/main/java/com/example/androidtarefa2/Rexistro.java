@@ -134,7 +134,7 @@ public class Rexistro extends AppCompatActivity {
     }
 
     /*Al pulsar botón rexistro*/
-    public void rexistrar(View view) {
+    public void rexistrar(View view) {//TODO comprobar si los campos están vacíos
         //campos del registro
         String nome = nomeText.getText().toString();
         String apelidos = apelidosText.getText().toString();

@@ -34,7 +34,9 @@
                 android:id="@+id/imagen"
                 android:layout_width="match_parent"
                 android:layout_height="150sp"
-                tools:srcCompat="@mipmap/ic_launcher_round" />
+                android:cropToPadding="false"
+                android:layout_marginBottom="18sp"
+                app:srcCompat="@drawable/senimaxe" />
 
             <TextView
                 android:id="@+id/nome"
