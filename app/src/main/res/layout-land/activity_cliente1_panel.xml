@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D7648DAF"
-    tools:context=".ClientePanel">
+    tools:context=".Cliente1Panel">
+
+    <include
+        android:id="@+id/cliente_layout_toolbar"
+        layout="@layout/menu_cliente"/>
 
     <LinearLayout
         android:id="@+id/datosUsuario"
