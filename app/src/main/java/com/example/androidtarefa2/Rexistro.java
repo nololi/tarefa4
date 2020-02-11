@@ -28,7 +28,7 @@ import java.util.Date;
 import persistencia.BaseDatos;
 
 public class Rexistro extends AppCompatActivity {
-    private int esAdmin;
+    private int esAdmin;//TODO optimizar
     //campos del registro
     private ImageView image;
     private TextView nomeText;
@@ -87,10 +87,10 @@ public class Rexistro extends AppCompatActivity {
             String usuario = getIntent().getExtras().getString("usuario");
             btnRegistroModificacion.setText("Modificar");
             cargaDatos(usuario);
-        } else {//si estoy en registro no quiero que se vean los campos y el valor esAdmin es 1 = usuario
+        } else {//si estoy en registro no quiero que se vean los campos de la contraseña y el valor esAdmin es 0 = usuario
             contrasinalRepeatCampo.setVisibility(View.INVISIBLE);
             contrasinalRepeatText.setVisibility(View.INVISIBLE);
-            esAdmin=1;
+            esAdmin=0;
         }
     }
 
@@ -108,14 +108,16 @@ public class Rexistro extends AppCompatActivity {
 
                 //esAdmin = cursor.getInt(2); //si es admin marca
                 if (Integer.parseInt(cursor.getString(2)) == 1) {
-                    System.out.println("es admin");
+                    Log.i(TAG, "Datos ya existentes de administrador");
                     administrador.setChecked(true);
                     cliente.setChecked(false);
+                    esAdmin=1;//es admin
 
                 } else {
-                    System.out.println("es usuario");
+                    Log.i(TAG, "Datos ya existentes de usuario");
                     administrador.setChecked(false);
                     cliente.setChecked(true);
+                    esAdmin=0;//es usuario
                 }
 
                 //imagen
@@ -129,7 +131,7 @@ public class Rexistro extends AppCompatActivity {
                 emailText.setText(cursor.getString(5));
             } while (cursor.moveToNext());
         }
-        System.out.println(usuario);
+
 
     }
 
@@ -159,14 +161,14 @@ public class Rexistro extends AppCompatActivity {
                     " es_admin ='" + esAdmin + "'" +
                     " WHERE usuario = '" + usuario + "'";
             BaseDatos.operacionsBD.execSQL(update);
-            Log.i(TAG, "Se han actualizado los datos del usuario " + usuario);
+            Log.i(TAG, "Se han actualizado los datos del usuario " + usuario + " tipo" + esAdmin);
 
             //regreso a mi pantalla : cliente o administrador
             Intent pantalla = new Intent(this, (esAdmin == 0 ? Cliente1Panel.class : AdminPanel.class));
             pantalla.putExtra("nome", nome);//nome
             pantalla.putExtra("apelidos", apelidos); //apelidos
             pantalla.putExtra("usuario", usuario); //usuario
-            pantalla.putExtra("rutaImaxe", rutaImagen);
+            pantalla.putExtra("rutaImaxe", rutaImagen);//TODO si no hay ruta imagen
             startActivity(pantalla);
             return;
 
